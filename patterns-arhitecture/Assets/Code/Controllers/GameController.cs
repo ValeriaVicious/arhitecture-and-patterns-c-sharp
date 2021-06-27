@@ -49,7 +49,6 @@ namespace MonkeyInTheSpace.GeekBrains
 
                 if (executeObject == null)
                 {
-                    print("Объекта нет");
                     continue;
                 }
                 else
