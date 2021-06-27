@@ -1,8 +1,9 @@
+using UnityEngine;
 
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    internal sealed class Character : IMoveMonkeyShip
+    internal sealed class Character : IMoveMonkeyShip, IExecute
     {
         #region Fields
 
@@ -49,6 +50,11 @@ namespace MonkeyInTheSpace.GeekBrains
             {
                 accelerationMove.RemoveAcceleration();
             }
+        }
+
+        public void Execute()
+        {
+            Debug.Log("Я курито");
         }
 
         #endregion

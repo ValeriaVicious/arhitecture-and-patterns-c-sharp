@@ -6,5 +6,6 @@ namespace MonkeyInTheSpace.GeekBrains
     {
         public const string HorizontalInput = "Horizontal";
         public const string VerticalInput = "Vertical";
+        public static string CharacterResourcesPath = "Character/Character";
     }
 }
