@@ -3,7 +3,7 @@
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    internal sealed class Player : MonoBehaviour, IExecute
+    internal class Player : MonoBehaviour, IExecute
     {
         #region Fields
 
@@ -12,6 +12,7 @@ namespace MonkeyInTheSpace.GeekBrains
         [SerializeField] private float _force;
         [SerializeField] private float _speed;
         [SerializeField] private float _acceleration;
+        [SerializeField] protected int _health = 100;
 
         private IInput _inputController;
         private IFireInput _fireInput;

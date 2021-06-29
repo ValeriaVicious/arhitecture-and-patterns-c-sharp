@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3097576548864446709}
   - component: {fileID: 3097576548864446710}
   - component: {fileID: 3097576548864446699}
+  - component: {fileID: 2700330897636701762}
   m_Layer: 0
   m_Name: Asteroid_Two
   m_TagString: Enemy
@@ -121,3 +122,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &2700330897636701762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3097576548864446711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bf6eb49a59d08348a8b279ca535e7cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 5
+  _healthOfEnemy: 5
+  _minSpeed: 2
+  _maxSpeed: 6
