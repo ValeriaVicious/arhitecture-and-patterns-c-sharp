@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 namespace MonkeyInTheSpace.GeekBrains
@@ -12,12 +13,13 @@ namespace MonkeyInTheSpace.GeekBrains
         [SerializeField] private float _force;
         [SerializeField] private float _speed;
         [SerializeField] private float _acceleration;
-        [SerializeField] protected int _health = 100;
+        [SerializeField] private int _health = 100;
 
         private IInput _inputController;
         private IFireInput _fireInput;
         private IMoveMonkeyShip _moveTransform;
         private Character _character;
+        private PlayerModel _playerModel;
 
         #endregion
 
@@ -30,6 +32,16 @@ namespace MonkeyInTheSpace.GeekBrains
             _character = new Character(_moveTransform);
             _inputController = new InputController(_character, _moveTransform);
             _fireInput = new GetMonkeyFire(_bullet, _barrel, _force);
+            _playerModel = new PlayerModel();
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag(Constants.EnemyTag))
+            {
+                _playerModel.SetNewHealth(5);
+                print(collision.gameObject.name);
+            }
         }
 
         #endregion

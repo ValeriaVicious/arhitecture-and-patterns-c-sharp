@@ -11,6 +11,8 @@ namespace MonkeyInTheSpace.GeekBrains
         private List<IExecute> _executeObjects;
         private References _references;
         private Player _player;
+        private PlayerController _playerController;
+        private PlayerModel _playerModel;
 
         #endregion
 
@@ -27,6 +29,10 @@ namespace MonkeyInTheSpace.GeekBrains
             {
                 _player = _references.PlayerMonkey;
             }
+
+            _playerModel = new PlayerModel();
+            var playerView = _player.GetComponent<PlayerView>();
+            _playerController = new PlayerController(playerView, _playerModel);
 
             _executeObjects.Add(_player);
         }
