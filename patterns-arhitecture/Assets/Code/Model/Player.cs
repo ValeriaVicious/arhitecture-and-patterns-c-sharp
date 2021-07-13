@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 namespace MonkeyInTheSpace.GeekBrains
@@ -16,7 +15,7 @@ namespace MonkeyInTheSpace.GeekBrains
         [SerializeField] private int _health = 100;
 
         private IInput _inputController;
-        private Shoot _fireInput;
+        private IShoot _fireInput;
         private IMoveMonkeyShip _moveTransform;
         private Character _character;
         private PlayerModel _playerModel;
