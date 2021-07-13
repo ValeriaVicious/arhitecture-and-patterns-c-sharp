@@ -3,22 +3,24 @@
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    internal sealed class InputController : IInput
+    internal sealed class InputController : IExecute
     {
         #region Fields
 
-        private readonly Character _character;
-        private readonly IMoveMonkeyShip _moveTransform;
+        private readonly IUserInputProxy _inputHorizontal;
+        private readonly IUserInputProxy _inputVertical;
+        private readonly IUserFireProxy _inputFire;
 
         #endregion
 
 
         #region ClassLifeCycles
 
-        public InputController(Character character, IMoveMonkeyShip move)
+        public InputController((IUserInputProxy inputHorizontal, IUserInputProxy inputVertical) input, IUserFireProxy inputFire)
         {
-            _character = character;
-            _moveTransform = move;
+            _inputHorizontal = input.inputHorizontal;
+            _inputVertical = input.inputVertical;
+            _inputFire = inputFire;
         }
 
         #endregion
@@ -26,20 +28,11 @@ namespace MonkeyInTheSpace.GeekBrains
 
         #region Methods
 
-        public void UserInput()
+        public void Execute(float deltaTime)
         {
-            _moveTransform.Move(Input.GetAxis(Constants.HorizontalInput),
-                Input.GetAxis(Constants.VerticalInput), Time.deltaTime);
-
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                _character.AddAcceleration();
-            }
-
-            if (Input.GetKeyUp(KeyCode.LeftShift))
-            {
-                _character.RemoveAcceleration();
-            }
+            _inputHorizontal.GetAxis();
+            _inputVertical.GetAxis();
+            _inputFire.GetFireDown();
         }
 
         #endregion

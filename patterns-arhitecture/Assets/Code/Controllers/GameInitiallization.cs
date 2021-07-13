@@ -14,8 +14,7 @@ namespace MonkeyInTheSpace.GeekBrains
             controllersHandler.Add(playerInitialization);
             controllersHandler.Add(inputInitialization);
 
-            controllersHandler.Add(new InputController(inputInitialization.GetInput(),
-                inputInitialization.GetFire()));
+            controllersHandler.Add(new InputController(inputInitialization.GetInput(), inputInitialization.GetFire()));
             controllersHandler.Add(new MoveController(inputInitialization.GetInput(),
                 playerInitialization.Move));
             controllersHandler.Add(new ShootController(inputInitialization.GetFire(),
