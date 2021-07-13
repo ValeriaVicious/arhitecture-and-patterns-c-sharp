@@ -2,7 +2,7 @@
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    public interface IInput
+    public interface IInput : IController
     {
         void UserInput();
     }

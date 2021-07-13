@@ -2,7 +2,7 @@
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    public interface IExecute
+    public interface IExecute : IController
     {
         void Execute();
     }
