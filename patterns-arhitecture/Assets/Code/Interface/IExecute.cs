@@ -4,6 +4,6 @@ namespace MonkeyInTheSpace.GeekBrains
 {
     public interface IExecute : IController
     {
-        void Execute();
+        void Execute(float deltaTime);
     }
 }

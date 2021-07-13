@@ -41,7 +41,7 @@ namespace MonkeyInTheSpace.GeekBrains
 
         public void Dispose()
         {
-            _controllersHandler.Cleanup();
+            _controllersHandler.CleanUp();
         }
 
         #endregion
