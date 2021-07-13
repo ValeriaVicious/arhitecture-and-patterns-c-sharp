@@ -3,7 +3,7 @@
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    internal sealed class GetMonkeyFire : IFireInput
+    internal sealed class GetMonkeyFire : Shoot
     {
         #region Fields
 
