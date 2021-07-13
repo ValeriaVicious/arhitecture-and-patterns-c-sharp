@@ -2,7 +2,7 @@
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    internal class ShootController : ICleanup
+    internal sealed class ShootController : ICleanup
     {
         #region Fields
 

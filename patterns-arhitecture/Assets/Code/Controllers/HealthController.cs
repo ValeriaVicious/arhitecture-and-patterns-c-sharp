@@ -1,12 +1,53 @@
-﻿namespace MonkeyInTheSpace.GeekBrains
+﻿
+using UnityEngine;
+
+
+namespace MonkeyInTheSpace.GeekBrains
 {
-    internal class HealthController : ICleanup
+    internal sealed class HealthController : IInitialization, ICleanup
     {
-        private Player player;
+        #region Fields
+
+        private float _health;
+        private Player _player;
+
+        #endregion
+
+
+        #region ClassLifeCycles
 
         public HealthController(Player player)
         {
-            this.player = player;
+            _player = player;
         }
+
+        #endregion
+
+
+        #region Methods
+
+        public void CleanUp()
+        {
+            _player.OnCollisionEnterChange -= OnCollisionPlayer;
+        }
+
+        public void Initiallization()
+        {
+            _player.OnCollisionEnterChange += OnCollisionPlayer;
+        }
+
+        private void OnCollisionPlayer(GameObject enemy)
+        {
+            if (_health <= 0)
+            {
+                Object.Destroy(_player);
+            }
+            else
+            {
+                _health--;
+            }
+        }
+
+        #endregion
     }
 }
