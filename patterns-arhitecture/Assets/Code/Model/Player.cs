@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    internal class Player : MonoBehaviour
+    public class Player : MonoBehaviour
     {
         #region Fields
 

@@ -41,12 +41,12 @@ namespace MonkeyInTheSpace.GeekBrains
 
         #region Methods
 
-        public void Execute()
-        {
-            MoveTheEnemy();
-        }
-
         public abstract void MoveTheEnemy();
+
+        public void Execute(float deltaTime)
+        {
+            throw new System.NotImplementedException();
+        }
 
         #endregion
     }

@@ -4,7 +4,7 @@
 namespace MonkeyInTheSpace.GeekBrains
 {
     [CreateAssetMenu(fileName = "PlayerConfig", menuName = "Configs/PlayerConfig", order = 0)]
-    internal sealed class PlayerConfig
+    public sealed class PlayerConfig : ScriptableObject
     {
         #region Fields
 
