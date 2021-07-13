@@ -62,7 +62,7 @@ namespace MonkeyInTheSpace.GeekBrains
             }
         }
 
-        public void Add(IController controller)
+        public void Add(ICleanup controller)
         {
             if (controller is IInitialization initialization)
             {

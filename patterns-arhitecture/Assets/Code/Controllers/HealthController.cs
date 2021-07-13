@@ -1,6 +1,6 @@
 ﻿namespace MonkeyInTheSpace.GeekBrains
 {
-    internal class HealthController : IController
+    internal class HealthController : ICleanup
     {
         private Player player;
 
