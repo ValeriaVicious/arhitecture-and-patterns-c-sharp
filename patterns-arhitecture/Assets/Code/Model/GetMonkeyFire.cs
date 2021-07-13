@@ -3,7 +3,7 @@
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    internal sealed class GetMonkeyFire : Shoot
+    internal sealed class GetMonkeyFire : IShoot
     {
         #region Fields
 
@@ -28,18 +28,10 @@ namespace MonkeyInTheSpace.GeekBrains
 
         #region Methods
 
-        public void GetFire()
+        public void GetShoot()
         {
             var temAmmunition = Object.Instantiate(_bullet, _barrel.position, _barrel.rotation);
             temAmmunition.AddForce(_barrel.up * _force);
-        }
-
-        public void UserInput()
-        {
-            if (Input.GetButtonDown(Constants.FireInput))
-            {
-                GetFire();
-            }
         }
 
         #endregion
