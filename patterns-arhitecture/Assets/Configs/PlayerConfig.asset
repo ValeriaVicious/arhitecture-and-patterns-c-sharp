@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88adec2b37a8ea04b99f5d49ecf46de7, type: 3}
+  m_Name: PlayerConfig
+  m_EditorClassIdentifier: 
+  PlayerPrefab: {fileID: -1049521064352784823, guid: ea6d2ae635b695045952f88e8271b116, type: 3}
+  Bullet: {fileID: -4059299719738114309, guid: 24355889eb95e4c49a92efaf9dc4dc6a, type: 3}
+  PlayerSpeed: 5
+  PlayerHP: 100
+  BulletForce: 50
