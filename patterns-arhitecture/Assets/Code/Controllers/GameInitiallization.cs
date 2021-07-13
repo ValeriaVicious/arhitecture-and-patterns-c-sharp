@@ -1,6 +1,28 @@
-﻿namespace MonkeyInTheSpace.GeekBrains
+﻿
+
+namespace MonkeyInTheSpace.GeekBrains
 {
-    internal class GameInitiallization
+    internal sealed class GameInitiallization
     {
+        #region ClassLifeCycles
+
+        public GameInitiallization(ControllersHandler controllersHandler, GameConfig data)
+        {
+            var inputInitialization = new InputInitialization();
+            var playerInitialization = new PlayerInitialization(data.PlayerConfig);
+
+            controllersHandler.Add(playerInitialization);
+            controllersHandler.Add(inputInitialization);
+
+            controllersHandler.Add(new InputController(inputInitialization.GetInput(),
+                inputInitialization.GetFire()));
+            controllersHandler.Add(new MoveController(inputInitialization.GetInput(),
+                playerInitialization.Move));
+            controllersHandler.Add(new ShootController(inputInitialization.GetFire(),
+                playerInitialization.Shoot));
+            controllersHandler.Add(new HealthController(playerInitialization.Player));
+        }
+
+        #endregion
     }
 }
