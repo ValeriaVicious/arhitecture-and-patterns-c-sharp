@@ -1,51 +1,47 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    internal abstract class Enemy : MonoBehaviour, IExecute
+    internal sealed class Enemy : MonoBehaviour, IExecute
     {
         #region Fields
 
-        [SerializeField] protected float _healthOfEnemy = 5;
-        [SerializeField] protected float _minSpeed = 2;
-        [SerializeField] protected float _maxSpeed = 6;
-        [SerializeField] protected static int _damage = 5;
+        private EnemyConfig _enemyData;
+        private float _theEndPointOfTheEnemyFall = 10.0f;
 
-        protected Rigidbody2D _rigidBody;
+        public static Action<GameObject> OnEnemyOverFly;
 
         #endregion
 
         #region Properties
 
-        public static int Damage
-        {
-            get
-            {
-                return _damage;
-            }
-        }
-
-        #endregion
-
-
-        #region UnityMethods
-
-        private void Start()
-        {
-            _rigidBody = GetComponent<Rigidbody2D>();
-        }
+        public int Damage => _enemyData.EnemyDamage;
 
         #endregion
 
 
         #region Methods
 
-        public abstract void MoveTheEnemy();
+        private void TheEnemyFlewOffTheScreen()
+        {
+            transform.Translate(Vector3.down * _enemyData.Speed);
+            if (transform.position.y < -_theEndPointOfTheEnemyFall && OnEnemyOverFly != null)
+            {
+                OnEnemyOverFly(gameObject);
+            }
+        }
+
+        public void InitOfEnemy(EnemyConfig enemyData)
+        {
+            _enemyData = enemyData;
+            GetComponent<SpriteRenderer>().sprite = _enemyData.MainSprite;
+        }
 
         public void Execute(float deltaTime)
         {
-            throw new System.NotImplementedException();
+            TheEnemyFlewOffTheScreen();
         }
 
         #endregion

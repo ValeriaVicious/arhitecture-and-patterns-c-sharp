@@ -23,7 +23,7 @@ namespace MonkeyInTheSpace.GeekBrains
         public float Speed => _speedOfEnemy;
 
 
-        public float EnemyDamage => _damageOfEnemy;
+        public int EnemyDamage => _damageOfEnemy;
 
         #endregion
     }
