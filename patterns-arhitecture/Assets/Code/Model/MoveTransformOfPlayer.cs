@@ -41,6 +41,15 @@ namespace MonkeyInTheSpace.GeekBrains
             var speed = deltaTime * Speed;
             _moveVector.Set(horizontal * speed, vertical * speed, 0.0f);
             _transformOfObject.localPosition += _moveVector;
+
+            if (_transformOfObject.position.x > -CameraOfTheGame.Border)
+            {
+                _transformOfObject.transform.Translate(Vector3.left * speed);
+            }
+            if (_transformOfObject.position.x < CameraOfTheGame.Border)
+            {
+                _transformOfObject.transform.Translate(Vector3.right * speed);
+            }
         }
 
         #endregion
