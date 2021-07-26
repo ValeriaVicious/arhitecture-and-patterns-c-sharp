@@ -11,6 +11,7 @@ namespace MonkeyInTheSpace.GeekBrains
         [SerializeField] private GameConfig _gameConfig;
         private ControllersHandler _controllersHandler;
         private GameInitiallization _gameInitiallization;
+        private IBorderCamera _borderOfCamera;
 
         #endregion
 
@@ -21,6 +22,7 @@ namespace MonkeyInTheSpace.GeekBrains
         {
             _controllersHandler = new ControllersHandler();
             _gameInitiallization = new GameInitiallization(_controllersHandler, _gameConfig);
+            _borderOfCamera = new CameraOfTheGame();
         }
 
         private void Start()
