@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: UFO
   m_EditorClassIdentifier: 
   _mainSprite: {fileID: 21300000, guid: f19b615628ffda74d89c56579583c301, type: 3}
-  _speedOfEnemy: 1.9
+  _speedOfEnemy: 0.06
   _damageOfEnemy: 2
