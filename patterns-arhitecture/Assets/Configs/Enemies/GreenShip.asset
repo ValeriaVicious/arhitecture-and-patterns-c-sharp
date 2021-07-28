@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GreenShip
   m_EditorClassIdentifier: 
   _mainSprite: {fileID: 21300000, guid: 6aaa9000aca886f4e839929fadd40b11, type: 3}
-  _speedOfEnemy: 0.05
+  _speedOfEnemy: 0.04
   _damageOfEnemy: 3

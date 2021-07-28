@@ -4,20 +4,42 @@ using UnityEngine;
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    internal sealed class Enemy : MonoBehaviour, IExecute
+    internal sealed class Enemy : MonoBehaviour
     {
         #region Fields
 
         private EnemyConfig _enemyData;
-        private float _theEndPointOfTheEnemyFall = 10.0f;
+        private static float _theEndPointOfTheEnemyFall = 10.0f;
 
         public static Action<GameObject> OnEnemyOverFly;
+        public static Action<GameObject> OnEnemyCollision;
 
         #endregion
 
         #region Properties
 
         public int Damage => _enemyData.EnemyDamage;
+        public static float EndPointOfTheEnemyFall => _theEndPointOfTheEnemyFall;
+
+        public Transform GetTransform => transform;
+
+        #endregion
+
+
+        #region UnityMethods
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag(TagsConstants.BulletTag))
+            {
+                OnEnemyOverFly(gameObject);
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            TheEnemyFlewOffTheScreen();
+        }
 
         #endregion
 
@@ -37,11 +59,6 @@ namespace MonkeyInTheSpace.GeekBrains
         {
             _enemyData = enemyData;
             GetComponent<SpriteRenderer>().sprite = _enemyData.MainSprite;
-        }
-
-        public void Execute(float deltaTime)
-        {
-            TheEnemyFlewOffTheScreen();
         }
 
         #endregion
