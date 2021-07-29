@@ -7,20 +7,23 @@ namespace MonkeyInTheSpace.GeekBrains
     {
         #region Fields
 
-        private readonly Rigidbody2D _bullet;
-        private readonly Transform _barrel;
+        private readonly GameObject _bullet;
+        private readonly Transform _barrelSpawner;
         private readonly float _force;
+        private IViewService _pool;
 
         #endregion
 
 
         #region ClassLifeCycles
 
-        public GetMonkeyFire(Rigidbody2D bullet, Transform barrel, float force)
+        public GetMonkeyFire(Rigidbody2D bullet, Transform barrel, float force,
+            Sprite spriteOfBullet)
         {
-            _bullet = bullet;
-            _barrel = barrel;
+            _bullet = Bullet.CreateBullet(spriteOfBullet);
+            _barrelSpawner = barrel;
             _force = force;
+            _pool = new ViewViewServices();
         }
 
         #endregion
@@ -30,8 +33,7 @@ namespace MonkeyInTheSpace.GeekBrains
 
         public void GetShoot()
         {
-            var temAmmunition = Object.Instantiate(_bullet, _barrel.position, _barrel.rotation);
-            temAmmunition.AddForce(_barrel.up * _force);
+           var temAmmunition = _pool.CreateTheObject(_bullet);
         }
 
         #endregion

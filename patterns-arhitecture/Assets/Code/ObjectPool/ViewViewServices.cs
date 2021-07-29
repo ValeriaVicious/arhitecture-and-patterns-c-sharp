@@ -16,16 +16,16 @@ namespace MonkeyInTheSpace.GeekBrains
 
 
         #region Methods
-        public void CreateTheObject(GameObject prefab)
+        public GameObject CreateTheObject(GameObject prefab)
         {
-          if (!_viewCache.TryGetValue(prefab.GetInstanceID(),
-              out ObjectPool viewPool))
+            if (!_viewCache.TryGetValue(prefab.GetInstanceID(),
+                out ObjectPool viewPool))
             {
                 viewPool = new ObjectPool(prefab);
                 _viewCache[prefab.GetInstanceID()] = viewPool;
             }
 
-            viewPool.Pop();
+            return viewPool.Pop();
         }
 
         public void DestroyTheObject(GameObject gameObject)

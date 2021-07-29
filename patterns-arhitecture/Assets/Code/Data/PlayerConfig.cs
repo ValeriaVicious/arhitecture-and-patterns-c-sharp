@@ -10,9 +10,11 @@ namespace MonkeyInTheSpace.GeekBrains
 
         public Player PlayerPrefab;
         public Rigidbody2D Bullet;
+        public Sprite BulletSprite;
         public float PlayerSpeed;
         public float PlayerHP;
         public float BulletForce;
+        public float ShootCoolDown;
 
         #endregion
     }

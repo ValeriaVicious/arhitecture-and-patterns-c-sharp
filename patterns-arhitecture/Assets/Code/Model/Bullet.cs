@@ -15,6 +15,13 @@ namespace MonkeyInTheSpace.GeekBrains
 
         #region Methods
 
+        internal static GameObject CreateBullet(Sprite sprite)
+        {
+            var bullet = new GameObject(TagsConstants.BulletTag);
+            bullet.AddComponent<Bullet>();
+            return bullet;
+        }
+
         private void OnBecameInvisible()
         {
             OnBecameInvisibleBullet?.Invoke(gameObject);
