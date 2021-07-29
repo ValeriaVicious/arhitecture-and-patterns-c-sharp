@@ -1,0 +1,39 @@
+﻿using System.Collections.Generic;
+using UnityEngine;
+
+
+namespace MonkeyInTheSpace.GeekBrains
+{
+    internal sealed class ViewViewServices : IViewService
+    {
+        #region Fields
+
+        private readonly Dictionary<int, ObjectPool> _viewCache =
+            new Dictionary<int, ObjectPool>(_capacityOfObjects);
+        private static int _capacityOfObjects = 5;
+
+        #endregion
+
+
+        #region Methods
+        public void CreateTheObject(GameObject prefab)
+        {
+          if (!_viewCache.TryGetValue(prefab.GetInstanceID(),
+              out ObjectPool viewPool))
+            {
+                viewPool = new ObjectPool(prefab);
+                _viewCache[prefab.GetInstanceID()] = viewPool;
+            }
+
+            viewPool.Pop();
+        }
+
+        public void DestroyTheObject(GameObject gameObject)
+        {
+            _viewCache[gameObject.GetInstanceID()].Push(gameObject);
+        }
+
+        #endregion
+
+    }
+}
