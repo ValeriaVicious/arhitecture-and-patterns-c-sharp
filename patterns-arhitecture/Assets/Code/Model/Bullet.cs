@@ -10,6 +10,10 @@ namespace MonkeyInTheSpace.GeekBrains
 
         public event Action<GameObject> OnBecameInvisibleBullet;
 
+        private static float _massOfBody = 1.0f;
+        private static float _radiusOfCollider = 0.25f;
+        private static bool _isTriggerOfCollider = true;
+
         #endregion
 
 
@@ -18,6 +22,9 @@ namespace MonkeyInTheSpace.GeekBrains
         internal static GameObject CreateBullet(Sprite sprite)
         {
             var bullet = new GameObject(TagsConstants.BulletTag);
+            bullet.AddSpriteToTheObject(sprite);
+            bullet.AddCircleCollider2DToTheObject(_radiusOfCollider, _isTriggerOfCollider);
+            bullet.AddRigidBody2DToTheObject(_massOfBody);
             bullet.AddComponent<Bullet>();
             return bullet;
         }
