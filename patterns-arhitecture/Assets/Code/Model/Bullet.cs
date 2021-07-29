@@ -1,24 +1,23 @@
 ﻿using UnityEngine;
+using System;
 
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    internal sealed class Bullet
+    internal sealed class Bullet : MonoBehaviour
     {
-        #region Properties
+        #region Fields
 
-        public float Damage { get; private set; }
-        public GameObject BulletObject { get; private set; }
+        public event Action<GameObject> OnBecameInvisibleBullet;
 
         #endregion
 
 
-        #region ClassLifeCycles
+        #region Methods
 
-        public Bullet(float damage, GameObject bullet)
+        private void OnBecameInvisible()
         {
-            Damage = damage;
-            BulletObject = bullet;
+            OnBecameInvisibleBullet?.Invoke(gameObject);
         }
 
         #endregion
