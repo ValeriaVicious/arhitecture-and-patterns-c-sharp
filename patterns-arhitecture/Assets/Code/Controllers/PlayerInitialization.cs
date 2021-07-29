@@ -30,7 +30,8 @@ namespace MonkeyInTheSpace.GeekBrains
             _player = Object.Instantiate(playerConfig.PlayerPrefab);
             _movePlayer = new MoveTransformOfPlayer(_player.transform, playerConfig.PlayerSpeed);
 
-            _shoot = new GetMonkeyFire(playerConfig.Bullet, _player.Barrel, playerConfig.BulletForce);
+            _shoot = new GetMonkeyFire(playerConfig.Bullet, _player.Barrel, playerConfig.BulletForce,
+                playerConfig.BulletSprite);
         }
 
         #endregion

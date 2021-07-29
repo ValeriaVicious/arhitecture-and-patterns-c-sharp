@@ -33,7 +33,12 @@ namespace MonkeyInTheSpace.GeekBrains
 
         public void GetShoot()
         {
-           var temAmmunition = _pool.CreateTheObject(_bullet);
+            var temAmmunition = _pool.CreateTheObject(_bullet);
+            temAmmunition.transform.position = _barrelSpawner.transform.position;
+
+            temAmmunition.GetComponent<Rigidbody2D>().AddForce(_barrelSpawner.up * _force);
+            temAmmunition.GetComponent<Bullet>().OnBecameInvisibleBullet += gameObject =>
+            _pool.DestroyTheObject(_bullet);
         }
 
         #endregion
