@@ -24,6 +24,7 @@ namespace MonkeyInTheSpace.GeekBrains
             _barrelSpawner = barrel;
             _force = force;
             _pool = new ViewViewServices();
+            _bullet.SetActive(false);
         }
 
         #endregion
@@ -38,7 +39,7 @@ namespace MonkeyInTheSpace.GeekBrains
 
             temAmmunition.GetComponent<Rigidbody2D>().AddForce(_barrelSpawner.up * _force);
             temAmmunition.GetComponent<Bullet>().OnBecameInvisibleBullet += gameObject =>
-            _pool.DestroyTheObject(_bullet);
+            _pool.DestroyTheObject(gameObject, _bullet);
         }
 
         #endregion

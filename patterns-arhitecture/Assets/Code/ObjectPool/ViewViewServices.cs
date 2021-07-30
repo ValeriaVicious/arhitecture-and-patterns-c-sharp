@@ -28,9 +28,9 @@ namespace MonkeyInTheSpace.GeekBrains
             return viewPool.Pop();
         }
 
-        public void DestroyTheObject(GameObject gameObject)
+        public void DestroyTheObject(GameObject gameObject, GameObject prefab)
         {
-            _viewCache[gameObject.GetInstanceID()].Push(gameObject);
+            _viewCache[prefab.GetInstanceID()].Push(gameObject);
         }
 
         #endregion

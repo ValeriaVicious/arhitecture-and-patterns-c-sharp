@@ -12,7 +12,7 @@ namespace MonkeyInTheSpace.GeekBrains
 
         private static float _massOfBody = 1.0f;
         private static float _radiusOfCollider = 0.25f;
-        private static bool _isTriggerOfCollider = true;
+        private static bool _isTriggerOfCollider = false;
 
         #endregion
 
