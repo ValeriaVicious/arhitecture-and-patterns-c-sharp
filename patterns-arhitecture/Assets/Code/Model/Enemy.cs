@@ -12,7 +12,7 @@ namespace MonkeyInTheSpace.GeekBrains
         private static float _theEndPointOfTheEnemyFall = 10.0f;
 
         public static Action<GameObject> OnEnemyOverFly;
-        public static Action<GameObject> OnEnemyCollision;
+        public static Action<GameObject> OnTriggerEnterChanging;
 
         #endregion
 
@@ -28,12 +28,9 @@ namespace MonkeyInTheSpace.GeekBrains
 
         #region UnityMethods
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collision.gameObject.CompareTag(TagsConstants.BulletTag))
-            {
-                OnEnemyOverFly(gameObject);
-            }
+            OnTriggerEnterChanging?.Invoke(collider.gameObject);
         }
 
         private void FixedUpdate()
