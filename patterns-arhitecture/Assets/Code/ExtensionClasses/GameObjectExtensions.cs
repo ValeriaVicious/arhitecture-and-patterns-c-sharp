@@ -18,6 +18,7 @@ namespace MonkeyInTheSpace.GeekBrains
         {
             var component = gameObject.GetOrAddComponentToTheObject<Rigidbody2D>();
             component.mass = massOfBody;
+            component.gravityScale = 0.0f;
             return gameObject;
         }
 
