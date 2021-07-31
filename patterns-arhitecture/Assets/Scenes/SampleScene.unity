@@ -412,6 +412,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 059d7fbf2d3b54b49880bf63b199b84d, type: 2}
   - {fileID: 11400000, guid: baac514333800ea42834f77cf0ddc7c8, type: 2}
   - {fileID: 11400000, guid: c6ceedb5bbae20c4390190620e15049f, type: 2}
-  _enemyPrefab: {fileID: 6517795159335117214, guid: 6bd058a9708839249a60f02337757ec7, type: 3}
+  _enemyPrefab: {fileID: 5632538241886077472, guid: 6bd058a9708839249a60f02337757ec7, type: 3}
   _poolCount: 5
   _spawnTime: 1.5

@@ -10,12 +10,12 @@ namespace MonkeyInTheSpace.GeekBrains
 
         #region Fields
 
-        [SerializeField] private static Dictionary<GameObject, Enemy> Enemies;
         [SerializeField] private List<EnemyConfig> _enemySettings;
-        [SerializeField] private GameObject _enemyPrefab;
+        [SerializeField] private Enemy _enemyPrefab;
         [SerializeField] private int _poolCount;
         [SerializeField] private float _spawnTime;
 
+        private Dictionary<GameObject, Enemy> Enemies;
         private Queue<GameObject> _currentEnemies;
 
         #endregion
@@ -40,23 +40,20 @@ namespace MonkeyInTheSpace.GeekBrains
             {
                 _spawnTime = 1;
             }
-            while (true)
+            if (_currentEnemies.Count > 0)
             {
                 yield return new WaitForSeconds(_spawnTime);
-                if (_currentEnemies.Count > 0)
-                {
-                    var enemy = _currentEnemies.Dequeue();
-                    var getEnemyComponent = Enemies[enemy];
-                    enemy.SetActive(true);
+                var enemy = _currentEnemies.Dequeue();
+                var getEnemy = Enemies[enemy];
+                enemy.SetActive(true);
 
-                    int randomEnemyObject = Random.Range(0, _enemySettings.Count);
+                int randomEnemyObject = Random.Range(0, _enemySettings.Count);
 
-                    getEnemyComponent.InitOfEnemy(_enemySettings[randomEnemyObject]);
+                getEnemy.InitOfEnemy(_enemySettings[randomEnemyObject]);
 
-                    float positionx = Random.Range(-CameraOfTheGame.Border, CameraOfTheGame.Border);
-                    enemy.transform.position = new Vector3(positionx, transform.position.y);
+                float positionx = Random.Range(-CameraOfTheGame.Border, CameraOfTheGame.Border);
+                enemy.transform.position = new Vector3(positionx, transform.position.y);
 
-                }
             }
         }
 
@@ -75,12 +72,12 @@ namespace MonkeyInTheSpace.GeekBrains
             for (int i = 0; i < _poolCount; ++i)
             {
                 var prefabOfEnemy = Instantiate(_enemyPrefab);
-                var getEnemyComponent = prefabOfEnemy.GetComponent<Enemy>();
-                prefabOfEnemy.SetActive(false);
-                Enemies.Add(prefabOfEnemy, getEnemyComponent);
-                _currentEnemies.Enqueue(prefabOfEnemy);
+                prefabOfEnemy.gameObject.SetActive(false);
+                Enemies.Add(prefabOfEnemy.gameObject, prefabOfEnemy);
+                _currentEnemies.Enqueue(prefabOfEnemy.gameObject);
+                prefabOfEnemy.OnEnemyOverFly += ReturnEnemy;
             }
-            Enemy.OnEnemyOverFly += ReturnEnemy;
+
         }
 
         #endregion

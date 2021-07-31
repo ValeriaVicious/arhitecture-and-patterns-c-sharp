@@ -11,8 +11,8 @@ namespace MonkeyInTheSpace.GeekBrains
         private EnemyConfig _enemyData;
         private static float _theEndPointOfTheEnemyFall = 10.0f;
 
-        public static Action<GameObject> OnEnemyOverFly;
-        public static Action<GameObject> OnTriggerEnterChanging;
+        public Action<GameObject> OnEnemyOverFly;
+        public Action<GameObject> OnTriggerEnterChanging;
 
         #endregion
 
