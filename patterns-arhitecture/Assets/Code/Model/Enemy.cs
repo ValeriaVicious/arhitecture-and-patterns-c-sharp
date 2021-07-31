@@ -28,11 +28,6 @@ namespace MonkeyInTheSpace.GeekBrains
 
         #region UnityMethods
 
-        private void OnTriggerEnter2D(Collider2D collider)
-        {
-            OnTriggerEnterChanging?.Invoke(collider.gameObject);
-        }
-
         private void FixedUpdate()
         {
             TheEnemyFlewOffTheScreen();

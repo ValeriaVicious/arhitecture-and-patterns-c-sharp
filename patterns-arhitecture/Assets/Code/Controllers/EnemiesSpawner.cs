@@ -34,7 +34,6 @@ namespace MonkeyInTheSpace.GeekBrains
 
         #region Methods
 
-
         private IEnumerator Spawn()
         {
             if (_spawnTime == 0)
