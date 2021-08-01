@@ -27,6 +27,7 @@ namespace MonkeyInTheSpace.GeekBrains
         {
             var component = gameObject.GetOrAddComponentToTheObject<SpriteRenderer>();
             component.sprite = sprite;
+            component.sortingOrder = 1;
             return gameObject;
         }
 

@@ -9,6 +9,17 @@ namespace MonkeyInTheSpace.GeekBrains
         #region Fields
 
         private static float _border = 0;
+        private static Camera _mainCamera;
+
+        #endregion
+
+
+        #region ClassLifeCycles
+
+        public CameraOfTheGame()
+        {
+            _mainCamera = Camera.main;
+        }
 
         #endregion
 
@@ -21,8 +32,7 @@ namespace MonkeyInTheSpace.GeekBrains
             {
                 if (_border == 0)
                 {
-                    var getCamera = Camera.main;
-                    _border = getCamera.aspect * getCamera.orthographicSize;
+                    _border = _mainCamera.aspect * _mainCamera.orthographicSize;
                 }
                 return _border;
             }
