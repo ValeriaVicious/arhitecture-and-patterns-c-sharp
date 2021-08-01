@@ -21,7 +21,7 @@ namespace MonkeyInTheSpace.GeekBrains
 
         internal static GameObject CreateBullet(Sprite sprite)
         {
-            var bullet = new GameObject(TagsConstants.BulletTag);
+            var bullet = new GameObject(Constants.BulletTag);
             bullet.AddSpriteToTheObject(sprite);
             bullet.AddCircleCollider2DToTheObject(_radiusOfCollider, _isTriggerOfCollider);
             bullet.AddRigidBody2DToTheObject(_massOfBody);

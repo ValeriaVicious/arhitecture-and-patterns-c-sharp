@@ -8,8 +8,8 @@ namespace MonkeyInTheSpace.GeekBrains
     {
         #region Fields
 
-        private float _health;
-        private Player _player;
+        private readonly Player _player;
+        private PlayerConfig _playerConfig;
 
         #endregion
 
@@ -38,13 +38,13 @@ namespace MonkeyInTheSpace.GeekBrains
 
         private void OnCollisionPlayer(GameObject enemy)
         {
-            if (_health <= 0)
+            if (_playerConfig.PlayerHP <= 0)
             {
                 Object.Destroy(_player);
             }
             else
             {
-                _health--;
+                _playerConfig.PlayerHP--;
             }
         }
 

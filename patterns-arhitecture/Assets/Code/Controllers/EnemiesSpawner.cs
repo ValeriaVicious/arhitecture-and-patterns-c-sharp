@@ -5,16 +5,12 @@ using UnityEngine;
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    public sealed class EnemiesSpawner : MonoBehaviour
+    public sealed class EnemiesSpawner
     {
 
         #region Fields
 
-        [SerializeField] private List<EnemyConfig> _enemySettings;
-        [SerializeField] private Enemy _enemyPrefab;
-        [SerializeField] private int _poolCount;
-        [SerializeField] private float _spawnTime;
-
+        private EnemySpawnerConfig _enemySpawnConfigs;
         private Dictionary<GameObject, Enemy> Enemies;
         private Queue<GameObject> _currentEnemies;
 
@@ -23,11 +19,11 @@ namespace MonkeyInTheSpace.GeekBrains
 
         #region UnityMethods
 
-        private void Start()
+    /*    private void Start()
         {
             CreateAndGetAndLoadToThePoolObjects();
-            StartCoroutine(Spawn());
-        }
+            //StartCoroutine(Spawn());
+        }*/
 
         #endregion
 
@@ -36,30 +32,35 @@ namespace MonkeyInTheSpace.GeekBrains
 
         private IEnumerator Spawn()
         {
-            if (_spawnTime == 0)
+            if (_enemySpawnConfigs.SpawnTime == 0)
             {
-                _spawnTime = 1;
+                _enemySpawnConfigs.SpawnTime = 1;
             }
-            if (_currentEnemies.Count > 0)
+
+            while (true)
             {
-                yield return new WaitForSeconds(_spawnTime);
-                var enemy = _currentEnemies.Dequeue();
-                var getEnemy = Enemies[enemy];
-                enemy.SetActive(true);
+                if (_currentEnemies.Count > 0)
+                {
+                    yield return new WaitForSeconds(_enemySpawnConfigs.SpawnTime);
+                    var enemy = _currentEnemies.Dequeue();
+                    var getEnemy = Enemies[enemy];
+                    enemy.SetActive(true);
 
-                int randomEnemyObject = Random.Range(0, _enemySettings.Count);
+                    int randomEnemyObject = Random.Range(0, _enemySpawnConfigs.EnemyConfigs.Count);
 
-                getEnemy.InitOfEnemy(_enemySettings[randomEnemyObject]);
+                    getEnemy.InitOfEnemy(_enemySpawnConfigs.EnemyConfigs[randomEnemyObject]);
 
-                float positionx = Random.Range(-CameraOfTheGame.Border, CameraOfTheGame.Border);
-                enemy.transform.position = new Vector3(positionx, transform.position.y);
+                    float positionX = Random.Range(-CameraOfTheGame.Border, CameraOfTheGame.Border);
+                    enemy.transform.position = new Vector3(positionX, _enemySpawnConfigs.Spawner.transform.position.y);
 
+                }
             }
+
         }
 
         private void ReturnEnemy(GameObject enemy)
         {
-            enemy.transform.position = transform.position;
+            enemy.transform.position = _enemySpawnConfigs.Spawner.transform.position;
             enemy.SetActive(false);
             _currentEnemies.Enqueue(enemy);
         }
@@ -69,9 +70,9 @@ namespace MonkeyInTheSpace.GeekBrains
             Enemies = new Dictionary<GameObject, Enemy>();
             _currentEnemies = new Queue<GameObject>();
 
-            for (int i = 0; i < _poolCount; ++i)
+            for (int i = 0; i < _enemySpawnConfigs.PoolCount; ++i)
             {
-                var prefabOfEnemy = Instantiate(_enemyPrefab);
+                var prefabOfEnemy = Object.Instantiate(_enemySpawnConfigs.EnemyPrefab);
                 prefabOfEnemy.gameObject.SetActive(false);
                 Enemies.Add(prefabOfEnemy.gameObject, prefabOfEnemy);
                 _currentEnemies.Enqueue(prefabOfEnemy.gameObject);

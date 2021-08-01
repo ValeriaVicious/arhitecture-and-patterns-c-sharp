@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43c7567011c173e48b0e75da47b964e6, type: 3}
+  m_Name: EnemiesSpawnerConfig
+  m_EditorClassIdentifier: 
+  EnemyConfigs:
+  - {fileID: 11400000, guid: c6ceedb5bbae20c4390190620e15049f, type: 2}
+  - {fileID: 11400000, guid: baac514333800ea42834f77cf0ddc7c8, type: 2}
+  - {fileID: 11400000, guid: 059d7fbf2d3b54b49880bf63b199b84d, type: 2}
+  - {fileID: 11400000, guid: 49e272024a99adc43aa4fa7885e655ac, type: 2}
+  - {fileID: 11400000, guid: 4ea64595bfb1f1c44961028464d1fbab, type: 2}
+  EnemyPrefab: {fileID: 5632538241886077472, guid: 6bd058a9708839249a60f02337757ec7, type: 3}
+  Spawner: {fileID: 1923205277927889130, guid: 2bac8e11d5597254fab29233e2b55696, type: 3}
+  SpawnTime: 1.5
+  PoolCount: 5

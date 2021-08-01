@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    internal sealed class Enemy : MonoBehaviour
+    public sealed class Enemy : MonoBehaviour
     {
         #region Fields
 

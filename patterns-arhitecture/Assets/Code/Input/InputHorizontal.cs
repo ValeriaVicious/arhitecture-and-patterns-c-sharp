@@ -18,7 +18,7 @@ namespace MonkeyInTheSpace.GeekBrains
 
         public void GetAxis()
         {
-            AxisOnChange.Invoke(Input.GetAxis(AxisConstants.HorizontalInput));
+            AxisOnChange.Invoke(Input.GetAxis(Constants.HorizontalInput));
         }
 
         #endregion

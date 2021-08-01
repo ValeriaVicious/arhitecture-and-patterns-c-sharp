@@ -10,5 +10,6 @@ namespace MonkeyInTheSpace.GeekBrains
         public const string FireInput = "Fire1";
         public const string EnemyTag = "Enemy";
         public const string BulletResourcesPath = "Ammunition/Bullet";
+        public const string BulletTag = "Bullet";
     }
 }
