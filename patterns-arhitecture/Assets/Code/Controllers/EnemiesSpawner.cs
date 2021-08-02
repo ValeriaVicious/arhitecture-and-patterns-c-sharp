@@ -17,13 +17,13 @@ namespace MonkeyInTheSpace.GeekBrains
         #endregion
 
 
-        #region UnityMethods
+        #region ClassLifeCycles
 
-    /*    private void Start()
+        public EnemiesSpawner()
         {
             CreateAndGetAndLoadToThePoolObjects();
-            //StartCoroutine(Spawn());
-        }*/
+            Spawn().StartCoroutine(out _);
+        }
 
         #endregion
 
