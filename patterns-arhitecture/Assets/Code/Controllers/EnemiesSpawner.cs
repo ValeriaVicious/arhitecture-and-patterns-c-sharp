@@ -11,7 +11,7 @@ namespace MonkeyInTheSpace.GeekBrains
         #region Fields
 
         private EnemySpawnerConfig _enemySpawnConfigs;
-        private Dictionary<GameObject, Enemy> Enemies;
+        private Dictionary<GameObject, Enemy> _enemies;
         private Queue<GameObject> _currentEnemies;
 
         #endregion
@@ -21,6 +21,8 @@ namespace MonkeyInTheSpace.GeekBrains
 
         public EnemiesSpawner()
         {
+            _enemies = new Dictionary<GameObject, Enemy>();
+            _currentEnemies = new Queue<GameObject>();
             CreateAndGetAndLoadToThePoolObjects();
             Spawn().StartCoroutine(out _);
         }
@@ -43,7 +45,7 @@ namespace MonkeyInTheSpace.GeekBrains
                 {
                     yield return new WaitForSeconds(_enemySpawnConfigs.SpawnTime);
                     var enemy = _currentEnemies.Dequeue();
-                    var getEnemy = Enemies[enemy];
+                    var getEnemy = _enemies[enemy];
                     enemy.SetActive(true);
 
                     int randomEnemyObject = Random.Range(0, _enemySpawnConfigs.EnemyConfigs.Count);
@@ -67,18 +69,14 @@ namespace MonkeyInTheSpace.GeekBrains
 
         private void CreateAndGetAndLoadToThePoolObjects()
         {
-            Enemies = new Dictionary<GameObject, Enemy>();
-            _currentEnemies = new Queue<GameObject>();
-
             for (int i = 0; i < _enemySpawnConfigs.PoolCount; ++i)
             {
                 var prefabOfEnemy = Object.Instantiate(_enemySpawnConfigs.EnemyPrefab);
                 prefabOfEnemy.gameObject.SetActive(false);
-                Enemies.Add(prefabOfEnemy.gameObject, prefabOfEnemy);
+                _enemies.Add(prefabOfEnemy.gameObject, prefabOfEnemy);
                 _currentEnemies.Enqueue(prefabOfEnemy.gameObject);
                 prefabOfEnemy.OnEnemyOverFly += ReturnEnemy;
             }
-
         }
 
         #endregion
