@@ -2,7 +2,7 @@
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    internal sealed class ShootController : ICleanup
+    internal sealed class ShootController : ICleanup, IInitialization
     {
         #region Fields
 
@@ -18,7 +18,6 @@ namespace MonkeyInTheSpace.GeekBrains
         {
             _userFireInput = userFireProxy;
             _shoot = shoot;
-            _userFireInput.FireInputGetDown += OnFire;
         }
 
         #endregion
@@ -29,6 +28,11 @@ namespace MonkeyInTheSpace.GeekBrains
         public void CleanUp()
         {
             _userFireInput.FireInputGetDown -= OnFire;
+        }
+
+        public void Initiallization()
+        {
+            _userFireInput.FireInputGetDown += OnFire;
         }
 
         private void OnFire(bool isShoot)
