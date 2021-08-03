@@ -3,7 +3,7 @@
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    internal sealed class ControllersHandler : IInitialization, IExecute, ILateExecute, ICleanup
+    internal sealed class ControllersHandler : IInitialization, IExecute, ILateExecute, ICleanup, IFixedExecute
     {
         #region Fields
 
@@ -11,6 +11,7 @@ namespace MonkeyInTheSpace.GeekBrains
         private readonly List<IExecute> _executeControllers;
         private readonly List<ILateExecute> _lateExecuteControllers;
         private readonly List<ICleanup> _cleanUpControllers;
+        private readonly List<IFixedExecute> _fixedExecuteControllers;
 
         #endregion
 
@@ -23,6 +24,7 @@ namespace MonkeyInTheSpace.GeekBrains
             _executeControllers = new List<IExecute>();
             _lateExecuteControllers = new List<ILateExecute>();
             _cleanUpControllers = new List<ICleanup>();
+            _fixedExecuteControllers = new List<IFixedExecute>();
         }
 
         #endregion
@@ -82,6 +84,14 @@ namespace MonkeyInTheSpace.GeekBrains
             if (controller is ICleanup cleanUp)
             {
                 _cleanUpControllers.Add(cleanUp);
+            }
+        }
+
+        public void FixedExecute(float deltaTime)
+        {
+            for (int i = 0; i < _fixedExecuteControllers.Count; ++i)
+            {
+                _fixedExecuteControllers[i].FixedExecute(deltaTime);
             }
         }
 
