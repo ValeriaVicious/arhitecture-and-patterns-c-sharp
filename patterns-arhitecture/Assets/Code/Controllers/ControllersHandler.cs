@@ -85,6 +85,11 @@ namespace MonkeyInTheSpace.GeekBrains
             {
                 _cleanUpControllers.Add(cleanUp);
             }
+
+            if (controller is IFixedExecute fixedExecute)
+            {
+                _fixedExecuteControllers.Add(fixedExecute);
+            }
         }
 
         public void FixedExecute(float deltaTime)

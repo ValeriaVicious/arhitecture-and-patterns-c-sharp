@@ -36,6 +36,12 @@ namespace MonkeyInTheSpace.GeekBrains
             _controllersHandler.Execute(deltaTime);
         }
 
+        private void FixedUpdate()
+        {
+            var deltaTime = Time.deltaTime;
+            _controllersHandler.FixedExecute(deltaTime);
+        }
+
         #endregion
 
 

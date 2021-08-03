@@ -8,6 +8,7 @@ namespace MonkeyInTheSpace.GeekBrains
     {
         #region Fields
 
+        private EnemyConfig _enemyData;
         public Action<GameObject> OnEnemyOverFly;
         public Action<GameObject> OnTriggerEnterChanging;
 
@@ -18,6 +19,16 @@ namespace MonkeyInTheSpace.GeekBrains
         public Transform GetTransform => transform;
 
         #endregion
- 
+
+
+        #region Methods
+
+        public void InitOfEnemy(EnemyConfig enemyData)
+        {
+            _enemyData = enemyData;
+            GetComponent<SpriteRenderer>().sprite = _enemyData.MainSprite;
+        }
+
+        #endregion
     }
 }

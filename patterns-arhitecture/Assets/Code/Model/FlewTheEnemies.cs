@@ -3,7 +3,7 @@
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    internal sealed class InitAndFlewTheEnemies : IFixedExecute
+    internal sealed class FlewTheEnemies : IFixedExecute
     {
         #region Fields
 
@@ -24,16 +24,11 @@ namespace MonkeyInTheSpace.GeekBrains
         private void TheEnemyFlewOffTheScreen()
         {
             _enemy.GetTransform.Translate(Vector3.down * _enemyData.Speed);
+
             if (_enemy.transform.position.y < -_theEndPointOfTheEnemyFall && _enemy.OnEnemyOverFly != null)
             {
                 _enemy.OnEnemyOverFly(_enemy.gameObject);
             }
-        }
-
-        public void InitOfEnemy(EnemyConfig enemyData)
-        {
-            _enemyData = enemyData;
-            _enemy.GetComponent<SpriteRenderer>().sprite = _enemyData.MainSprite;
         }
 
         #endregion
