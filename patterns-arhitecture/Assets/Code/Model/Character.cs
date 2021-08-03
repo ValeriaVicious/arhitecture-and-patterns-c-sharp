@@ -35,22 +35,6 @@ namespace MonkeyInTheSpace.GeekBrains
             _moveImplementation.Move(horizontal, vertical, deltaTime);
         }
 
-        public void AddAcceleration()
-        {
-            if (_moveImplementation is AccelerationMove accelerationMove)
-            {
-                accelerationMove.AddAcceleration();
-            }
-        }
-
-        public void RemoveAcceleration()
-        {
-            if (_moveImplementation is AccelerationMove accelerationMove)
-            {
-                accelerationMove.RemoveAcceleration();
-            }
-        }
-
         #endregion
 
     }

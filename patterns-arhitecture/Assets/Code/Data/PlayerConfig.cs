@@ -12,6 +12,7 @@ namespace MonkeyInTheSpace.GeekBrains
         public Rigidbody2D Bullet;
         public Sprite BulletSprite;
         public float PlayerSpeed;
+        public float AccelerationSpeed;
         public float PlayerHP;
         public float BulletForce;
         public float ShootCoolDown;

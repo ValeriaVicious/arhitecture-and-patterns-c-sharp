@@ -9,6 +9,7 @@ namespace MonkeyInTheSpace.GeekBrains
         private IUserInputProxy _verticalInput;
         private IUserInputProxy _horizontalInput;
         private IUserFireProxy _fireInput;
+        private IUserAccelerationProxy _accelerationProxy;
 
         #endregion
 
@@ -20,6 +21,7 @@ namespace MonkeyInTheSpace.GeekBrains
             _horizontalInput = new InputHorizontal();
             _fireInput = new InputFire();
             _verticalInput = new InputVertical();
+            _accelerationProxy = new InputAcceleration();
         }
 
         #endregion
@@ -41,6 +43,11 @@ namespace MonkeyInTheSpace.GeekBrains
         public IUserFireProxy GetFire()
         {
             return _fireInput;
+        }
+
+        public IUserAccelerationProxy GetAcceleration()
+        {
+            return _accelerationProxy;
         }
 
         #endregion
