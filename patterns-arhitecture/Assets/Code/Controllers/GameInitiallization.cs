@@ -8,6 +8,7 @@ namespace MonkeyInTheSpace.GeekBrains
 
         public GameInitiallization(ControllersHandler controllersHandler, GameConfig data)
         {
+            ServiceLocator.SetService<IViewService>(new ViewViewServices());
             var inputInitialization = new InputInitialization();
             var playerInitialization = new PlayerInitialization(data.PlayerConfig);
             var enemiesSpawnerInitialization = new EnemiesSpawnerInitialization(data.EnemySpawnerConfig);
