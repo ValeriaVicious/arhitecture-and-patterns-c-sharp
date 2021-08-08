@@ -3,7 +3,7 @@
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    internal sealed class FlewTheEnemies : IFixedExecute
+    internal sealed class FlewTheEnemies
     {
         #region Fields
 
@@ -14,14 +14,20 @@ namespace MonkeyInTheSpace.GeekBrains
         #endregion
 
 
-        #region Methods
+        #region ClassLifeCycles
 
-        public void FixedExecute(float deltaTime)
+        public FlewTheEnemies(Enemy enemy, EnemyConfig enemyConfig)
         {
-            TheEnemyFlewOffTheScreen();
+            _enemy = enemy;
+            _enemyData = enemyConfig;
         }
 
-        private void TheEnemyFlewOffTheScreen()
+        #endregion
+
+
+        #region Methods
+
+        public void TheEnemyFlewOffTheScreen()
         {
             _enemy.GetTransform.Translate(Vector3.down * _enemyData.Speed);
 

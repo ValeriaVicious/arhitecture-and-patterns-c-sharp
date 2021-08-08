@@ -8,6 +8,7 @@ namespace MonkeyInTheSpace.GeekBrains
     {
         #region Fields
 
+        [SerializeField] private Enemy _enemyPrefab;
         [SerializeField] private Sprite _mainSprite;
         [SerializeField] private float _speedOfEnemy;
         [SerializeField] private int _damageOfEnemy;
@@ -19,6 +20,7 @@ namespace MonkeyInTheSpace.GeekBrains
 
         public Sprite MainSprite => _mainSprite;
 
+        public Enemy EnemyPrefab => _enemyPrefab;
 
         public float Speed => _speedOfEnemy;
 

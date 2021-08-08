@@ -8,5 +8,6 @@ namespace MonkeyInTheSpace.GeekBrains
     {
         public PlayerConfig PlayerConfig;
         public EnemySpawnerConfig EnemySpawnerConfig;
+        public EnemyConfig EnemyConfig;
     }
 }

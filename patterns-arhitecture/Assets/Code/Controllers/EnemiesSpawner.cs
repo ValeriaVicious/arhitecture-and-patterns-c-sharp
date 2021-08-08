@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    public sealed class EnemiesSpawner : IController
+    public sealed class EnemiesSpawner : IFixedExecute
     {
 
         #region Fields
@@ -13,14 +13,21 @@ namespace MonkeyInTheSpace.GeekBrains
         private EnemySpawnerConfig _enemySpawnConfigs;
         private Dictionary<GameObject, Enemy> _enemies;
         private Queue<GameObject> _currentEnemies;
+        private Enemy _enemy;
+        private EnemyConfig _enemyConfig;
+        private FlewTheEnemies _flewTheEnemies;
 
         #endregion
 
 
         #region ClassLifeCycles
 
-        public EnemiesSpawner(EnemySpawnerConfig enemySpawnerConfig)
+        public EnemiesSpawner(EnemySpawnerConfig enemySpawnerConfig, Enemy enemyPrefab, EnemyConfig enemyConfig)
         {
+            _enemy = enemyPrefab.gameObject.GetComponent<Enemy>();
+            _enemyConfig = enemyConfig;
+            _flewTheEnemies = new FlewTheEnemies(_enemy, _enemyConfig);
+
             _enemySpawnConfigs = enemySpawnerConfig;
             _enemies = new Dictionary<GameObject, Enemy>();
             _currentEnemies = new Queue<GameObject>();
@@ -78,6 +85,11 @@ namespace MonkeyInTheSpace.GeekBrains
                 _currentEnemies.Enqueue(prefabOfEnemy.gameObject);
                 prefabOfEnemy.OnEnemyOverFly += ReturnEnemy;
             }
+        }
+
+        public void FixedExecute(float deltaTime)
+        {
+            _flewTheEnemies.TheEnemyFlewOffTheScreen();
         }
 
         #endregion
