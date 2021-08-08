@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    public sealed class EnemiesSpawner
+    public sealed class EnemiesSpawner : IController
     {
 
         #region Fields
@@ -19,8 +19,9 @@ namespace MonkeyInTheSpace.GeekBrains
 
         #region ClassLifeCycles
 
-        public EnemiesSpawner()
+        public EnemiesSpawner(EnemySpawnerConfig enemySpawnerConfig)
         {
+            _enemySpawnConfigs = enemySpawnerConfig;
             _enemies = new Dictionary<GameObject, Enemy>();
             _currentEnemies = new Queue<GameObject>();
             CreateAndGetAndLoadToThePoolObjects();
