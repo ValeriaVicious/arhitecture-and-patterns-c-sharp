@@ -15,6 +15,8 @@ namespace MonkeyInTheSpace.GeekBrains
             var enemiesSpawnerInitialization = new EnemiesSpawnerInitialization(data.EnemySpawnerConfig);
 
             controllersHandler.Add(enemiesSpawnerInitialization);
+            controllersHandler.Add(enemyInitialization);
+ 
             controllersHandler.Add(playerInitialization);
             controllersHandler.Add(inputInitialization);
 
