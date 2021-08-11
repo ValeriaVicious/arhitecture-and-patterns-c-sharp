@@ -7,7 +7,10 @@ namespace MonkeyInTheSpace.GeekBrains.StructuralPatterns.Bridge
     {
         private void Start()
         {
-            var enemy = new Enemy(new MagicalAttack(), new Infantry());
+            var magicalEnemy = new Enemy(new MagicalAttack(), new Infantry());
+            var meleeEnemy = new Enemy(new MeleeAttack(), new Infantry());
+            var rangedEnemy = new Enemy(new RangedAttack(), new Infantry());
+            var hitmanEnemy = new Enemy(new IronSightShoot(), new Infantry());
         }
     }
 }
