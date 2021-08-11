@@ -43,6 +43,11 @@ namespace MonkeyInTheSpace.GeekBrains.StructuralPatterns.Decorator
             _bullet = bullet;
         }
 
+        internal void SetBarrelPosition(object barrelPositionMuffler)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void SetAudioClip(AudioClip audioClip)
         {
             _audioOfShot = audioClip;
