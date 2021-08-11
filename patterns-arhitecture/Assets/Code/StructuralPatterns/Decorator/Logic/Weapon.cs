@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 
 namespace MonkeyInTheSpace.GeekBrains.StructuralPatterns.Decorator
@@ -12,6 +13,8 @@ namespace MonkeyInTheSpace.GeekBrains.StructuralPatterns.Decorator
         private AudioClip _audioOfShot;
         private readonly AudioSource _audioSource;
         private float _force;
+
+        public List<ModificationWeapon> WeaponModifications { get; set; }
 
         #endregion
 
@@ -41,11 +44,6 @@ namespace MonkeyInTheSpace.GeekBrains.StructuralPatterns.Decorator
         public void SetBullet(IAmmunition bullet)
         {
             _bullet = bullet;
-        }
-
-        internal void SetBarrelPosition(object barrelPositionMuffler)
-        {
-            throw new System.NotImplementedException();
         }
 
         public void SetAudioClip(AudioClip audioClip)

@@ -369,6 +369,9 @@ MonoBehaviour:
   _barrelPositionOfMuffler: {fileID: 7406628571090833106, guid: 703e5f1c8ca5dcb48b503ba36d6066ed, type: 3}
   _muffler: {fileID: 7406628571090833107, guid: 703e5f1c8ca5dcb48b503ba36d6066ed, type: 3}
   _volumeFireOnMuffler: 3
+  _sightPosition: {fileID: 8999637390672379836, guid: e3747805d88515d4aba5967f3f8e8770, type: 3}
+  _sight: {fileID: 8999637390672379838, guid: e3747805d88515d4aba5967f3f8e8770, type: 3}
+  _forceOfSight: 300
 --- !u!1 &1859887279
 GameObject:
   m_ObjectHideFlags: 0
