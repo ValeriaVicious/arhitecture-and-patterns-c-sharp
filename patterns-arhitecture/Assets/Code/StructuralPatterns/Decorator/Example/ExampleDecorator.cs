@@ -15,6 +15,12 @@ namespace MonkeyInTheSpace.GeekBrains.StructuralPatterns.Decorator
         [SerializeField] private float _timeToDestrouTheBullet = 3.0f;
         [SerializeField] private float _force = 500.0f;
 
+        [Header("MufflerGun")]
+        [SerializeField] private AudioClip _audioClipOfMuffler;
+        [SerializeField] private Transform _barrelPositionOfMuffler;
+        [SerializeField] private GameObject _muffler;
+        [SerializeField] private float _volumeFireOnMuffler;
+
         private IFire _fire;
 
         #endregion
@@ -25,8 +31,16 @@ namespace MonkeyInTheSpace.GeekBrains.StructuralPatterns.Decorator
         private void Start()
         {
             IAmmunition ammunition = new Bullet(_bullet, _timeToDestrouTheBullet);
-            _fire = new Weapon(ammunition, _barrelPosition, _audioSource,
+            var weapon = new Weapon(ammunition, _barrelPosition, _audioSource,
                 _audioOfShot, _force);
+            var muffler = new Muffler(_muffler, _audioClipOfMuffler, _barrelPositionOfMuffler,
+                _volumeFireOnMuffler);
+
+            ModificationWeapon modificationWeapon = new ModificationMuffler(_audioSource, muffler, 
+                _barrelPositionOfMuffler.position);
+
+            modificationWeapon.ApplyModification(weapon);
+            _fire = modificationWeapon;
         }
 
         private void Update()
