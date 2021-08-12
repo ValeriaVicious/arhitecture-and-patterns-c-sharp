@@ -11,8 +11,8 @@ namespace MonkeyInTheSpace.GeekBrains
             ServiceLocator.SetService<IViewService>(new ViewViewServices());
             var inputInitialization = new InputInitialization();
             var playerInitialization = new PlayerInitialization(data.PlayerConfig);
-            var enemyInitialization = new EnemyInitialization(data.EnemyConfig);
             var enemiesSpawnerInitialization = new EnemiesSpawnerInitialization(data.EnemySpawnerConfig);
+            var enemyInitialization = new EnemyInitialization(data.EnemyConfig);
 
             controllersHandler.Add(enemiesSpawnerInitialization);
             controllersHandler.Add(enemyInitialization);
@@ -26,7 +26,7 @@ namespace MonkeyInTheSpace.GeekBrains
                 playerInitialization.Move));
             controllersHandler.Add(new ShootController(inputInitialization.GetFire(),
                 playerInitialization.Shoot, playerInitialization.Player, data.PlayerConfig.ShootCoolDown));
-            controllersHandler.Add(new HealthController(playerInitialization.Player));
+            controllersHandler.Add(new HealthController(playerInitialization.Player, data.PlayerConfig.PlayerHP));
             controllersHandler.Add(new EnemiesSpawner(data.EnemySpawnerConfig, enemyInitialization.Enemy, data.EnemyConfig));
         }
 

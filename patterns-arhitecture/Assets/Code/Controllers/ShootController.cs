@@ -11,7 +11,7 @@ namespace MonkeyInTheSpace.GeekBrains
 
         private readonly IUserFireProxy _userFireInput;
         private readonly IShoot _shoot;
-        private readonly LockedShoot _lockedShoot;
+        private LockedShoot _lockedShoot;
         private Player _player;
         private float _coolDownOfShot;
         private float _shootingPauseTime = 0.0f;
@@ -30,7 +30,6 @@ namespace MonkeyInTheSpace.GeekBrains
             _lockedShoot = new LockedShoot(false);
             _shoot = new ShootProxy(shoot, _lockedShoot);
             _coolDownOfShot = coolDownShot;
-            _player.OnCollisionEnterChange += OnCollisionPlayer;
         }
 
         #endregion
@@ -60,6 +59,7 @@ namespace MonkeyInTheSpace.GeekBrains
         public void Initiallization()
         {
             _userFireInput.FireInputGetDown += OnFire;
+            _player.OnCollisionEnterChange += OnCollisionPlayer;
         }
 
         private void OnFire(bool isShoot)
@@ -72,14 +72,13 @@ namespace MonkeyInTheSpace.GeekBrains
 
         public void Execute(float deltaTime)
         {
-            _shootingPauseTime = deltaTime;
-
             if (!_lockedShoot.IsLockedWeapon)
             {
                 return;
             }
 
-            if(_shootingPauseTime > _coolDownOfShot)
+            _shootingPauseTime += deltaTime;
+            if (_shootingPauseTime > _coolDownOfShot)
             {
                 _lockedShoot.IsLockedWeapon = false;
                 _shootingPauseTime = 0.0f;
