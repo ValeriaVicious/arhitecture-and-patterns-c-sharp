@@ -1,5 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
+using System;
+using Object = UnityEngine.Object;
 
 
 namespace MonkeyInTheSpace.GeekBrains
@@ -9,16 +10,18 @@ namespace MonkeyInTheSpace.GeekBrains
         #region Fields
 
         private readonly Player _player;
-        private PlayerConfig _playerConfig;
+        private event Action OnDeadEvent;
+        private float _hp;
 
         #endregion
 
 
         #region ClassLifeCycles
 
-        public HealthController(Player player)
+        public HealthController(Player player, float health)
         {
             _player = player;
+            _hp = health;
         }
 
         #endregion
@@ -38,13 +41,21 @@ namespace MonkeyInTheSpace.GeekBrains
 
         private void OnCollisionPlayer(GameObject enemy)
         {
-            if (_playerConfig.PlayerHP <= 0)
+            var enemyObject = enemy.GetComponent<Enemy>();
+
+            if (!enemyObject)
+            {
+                return;
+            }
+
+            if (_hp <= 0)
             {
                 Object.Destroy(_player);
+                OnDeadEvent?.Invoke();
             }
             else
             {
-                _playerConfig.PlayerHP--;
+                _hp -= enemyObject.Damage;
             }
         }
 

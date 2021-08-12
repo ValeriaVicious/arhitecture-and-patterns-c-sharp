@@ -11,6 +11,7 @@ namespace MonkeyInTheSpace.GeekBrains
         private EnemyConfig _enemyData;
         public Action<GameObject> OnEnemyOverFly;
         public Action<GameObject> OnTriggerEnterChanging;
+        internal float Damage;
 
         #endregion
 
