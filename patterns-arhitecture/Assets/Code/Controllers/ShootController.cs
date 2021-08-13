@@ -1,7 +1,6 @@
-﻿
-
-using System;
+﻿using System;
 using UnityEngine;
+
 
 namespace MonkeyInTheSpace.GeekBrains
 {
@@ -24,12 +23,12 @@ namespace MonkeyInTheSpace.GeekBrains
         public ShootController(IUserFireProxy userFireProxy, IShoot shoot,
             Player player, float coolDownShot)
         {
-            _userFireInput = userFireProxy;
-            _shoot = shoot;
-            _player = player;
             _lockedShoot = new LockedShoot(false);
             _shoot = new ShootProxy(shoot, _lockedShoot);
             _coolDownOfShot = coolDownShot;
+            _userFireInput = userFireProxy;
+            _shoot = shoot;
+            _player = player;
         }
 
         #endregion
@@ -44,10 +43,7 @@ namespace MonkeyInTheSpace.GeekBrains
             {
                 return;
             }
-            else
-            {
-                _lockedShoot.IsLockedWeapon = true;
-            }
+            _lockedShoot.IsLockedWeapon = true;
         }
 
         public void CleanUp()
@@ -72,12 +68,12 @@ namespace MonkeyInTheSpace.GeekBrains
 
         public void Execute(float deltaTime)
         {
+            _shootingPauseTime += deltaTime;
             if (!_lockedShoot.IsLockedWeapon)
             {
                 return;
             }
 
-            _shootingPauseTime += deltaTime;
             if (_shootingPauseTime > _coolDownOfShot)
             {
                 _lockedShoot.IsLockedWeapon = false;

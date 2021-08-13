@@ -16,7 +16,7 @@ namespace MonkeyInTheSpace.GeekBrains
 
             controllersHandler.Add(enemiesSpawnerInitialization);
             controllersHandler.Add(enemyInitialization);
- 
+
             controllersHandler.Add(playerInitialization);
             controllersHandler.Add(inputInitialization);
 
@@ -26,7 +26,7 @@ namespace MonkeyInTheSpace.GeekBrains
                 playerInitialization.Move));
             controllersHandler.Add(new ShootController(inputInitialization.GetFire(),
                 playerInitialization.Shoot, playerInitialization.Player, data.PlayerConfig.ShootCoolDown));
-            controllersHandler.Add(new HealthController(playerInitialization.Player, data.PlayerConfig.PlayerHP));
+            controllersHandler.Add(new HealthController(playerInitialization.Player, enemyInitialization.Enemy, data.PlayerConfig.PlayerHP));
             controllersHandler.Add(new EnemiesSpawner(data.EnemySpawnerConfig, enemyInitialization.Enemy, data.EnemyConfig));
         }
 

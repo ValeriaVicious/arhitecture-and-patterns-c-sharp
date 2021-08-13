@@ -10,6 +10,7 @@ namespace MonkeyInTheSpace.GeekBrains
         #region Fields
 
         private readonly Player _player;
+        private Enemy _enemy;
         private event Action OnDeadEvent;
         private float _hp;
 
@@ -18,9 +19,10 @@ namespace MonkeyInTheSpace.GeekBrains
 
         #region ClassLifeCycles
 
-        public HealthController(Player player, float health)
+        public HealthController(Player player, Enemy enemy, float health)
         {
             _player = player;
+            _enemy = enemy;
             _hp = health;
         }
 
@@ -41,9 +43,9 @@ namespace MonkeyInTheSpace.GeekBrains
 
         private void OnCollisionPlayer(GameObject enemy)
         {
-            var enemyObject = enemy.GetComponent<Enemy>();
+            _enemy = enemy.GetComponent<Enemy>();
 
-            if (!enemyObject)
+            if (!_enemy)
             {
                 return;
             }
@@ -55,7 +57,7 @@ namespace MonkeyInTheSpace.GeekBrains
             }
             else
             {
-                _hp -= enemyObject.Damage;
+                _hp -= _enemy.Damage;
             }
         }
 
