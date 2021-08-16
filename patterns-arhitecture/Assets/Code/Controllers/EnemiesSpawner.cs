@@ -47,23 +47,19 @@ namespace MonkeyInTheSpace.GeekBrains
                 _enemySpawnConfigs.SpawnTime = 1;
             }
 
-            while (true)
+            while (_currentEnemies.Count > 0)
             {
-                if (_currentEnemies.Count > 0)
-                {
-                    yield return new WaitForSeconds(_enemySpawnConfigs.SpawnTime);
-                    var enemy = _currentEnemies.Dequeue();
-                    var getEnemy = _enemies[enemy];
-                    enemy.SetActive(true);
+                yield return new WaitForSeconds(_enemySpawnConfigs.SpawnTime);
+                var enemy = _currentEnemies.Dequeue();
+                var getEnemy = _enemies[enemy];
+                enemy.SetActive(true);
 
-                    int randomEnemyObject = Random.Range(0, _enemySpawnConfigs.EnemyConfigs.Count);
+                int randomEnemyObject = Random.Range(0, _enemySpawnConfigs.EnemyConfigs.Count);
 
-                    getEnemy.InitOfEnemy(_enemySpawnConfigs.EnemyConfigs[randomEnemyObject]);
+                getEnemy.InitOfEnemy(_enemySpawnConfigs.EnemyConfigs[randomEnemyObject]);
 
-                    float positionX = Random.Range(-CameraOfTheGame.Border, CameraOfTheGame.Border);
-                    enemy.transform.position = new Vector3(positionX, _enemySpawnConfigs.Spawner.transform.position.y);
-
-                }
+                float positionX = Random.Range(-CameraOfTheGame.Border, CameraOfTheGame.Border);
+                enemy.transform.position = new Vector3(positionX, _enemySpawnConfigs.Spawner.transform.position.y);
             }
 
         }
