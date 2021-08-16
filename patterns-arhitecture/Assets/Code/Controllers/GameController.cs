@@ -1,18 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    internal sealed class GameController : MonoBehaviour
+    internal sealed class GameController : MonoBehaviour, IDisposable
     {
         #region Fields
 
-        private List<IExecute> _executeObjects;
-        private References _references;
-        private Player _player;
-        private PlayerController _playerController;
-        private PlayerModel _playerModel;
+        [SerializeField] private GameConfig _gameConfig;
+        private ControllersHandler _controllersHandler;
+        private GameInitiallization _gameInitiallization;
+        private IBorderCamera _borderOfCamera;
 
         #endregion
 
@@ -21,25 +20,26 @@ namespace MonkeyInTheSpace.GeekBrains
 
         private void Awake()
         {
-            _executeObjects = new List<IExecute>();
-            _references = new References();
-            _player = null;
+            _controllersHandler = new ControllersHandler();
+            _gameInitiallization = new GameInitiallization(_controllersHandler, _gameConfig);
+            _borderOfCamera = new CameraOfTheGame();
+        }
 
-            if (_player == null)
-            {
-                _player = _references.PlayerMonkey;
-            }
-
-            _playerModel = new PlayerModel();
-            var playerView = _player.GetComponent<PlayerView>();
-            _playerController = new PlayerController(playerView, _playerModel);
-
-            _executeObjects.Add(_player);
+        private void Start()
+        {
+            _controllersHandler.Initiallization();
         }
 
         private void Update()
         {
-            UpdateExecuteObjects();
+            var deltaTime = Time.deltaTime;
+            _controllersHandler.Execute(deltaTime);
+        }
+
+        private void FixedUpdate()
+        {
+            var deltaTime = Time.deltaTime;
+            _controllersHandler.FixedExecute(deltaTime);
         }
 
         #endregion
@@ -47,21 +47,9 @@ namespace MonkeyInTheSpace.GeekBrains
 
         #region Methods
 
-        private void UpdateExecuteObjects()
+        public void Dispose()
         {
-            for (int i = 0; i < _executeObjects.Count; i++)
-            {
-                var executeObject = _executeObjects[i];
-
-                if (executeObject == null)
-                {
-                    continue;
-                }
-                else
-                {
-                    executeObject.Execute();
-                }
-            }
+            _controllersHandler.CleanUp();
         }
 
         #endregion

@@ -1,24 +1,37 @@
 ﻿using UnityEngine;
+using System;
 
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    internal sealed class Bullet
+    internal sealed class Bullet : MonoBehaviour
     {
-        #region Properties
+        #region Fields
 
-        public float Damage { get; private set; }
-        public GameObject BulletObject { get; private set; }
+        public event Action<GameObject> OnBecameInvisibleBullet;
+
+        private static float _massOfBody = 1.0f;
+        private static float _radiusOfCollider = 0.25f;
+        private static bool _isTriggerOfCollider = true;
 
         #endregion
 
 
-        #region ClassLifeCycles
+        #region Methods
 
-        public Bullet(float damage, GameObject bullet)
+        internal static GameObject CreateBullet(Sprite sprite)
         {
-            Damage = damage;
-            BulletObject = bullet;
+            var bullet = new GameObject(Constants.BulletTag);
+            bullet.AddSpriteToTheObject(sprite);
+            bullet.AddCircleCollider2DToTheObject(_radiusOfCollider, _isTriggerOfCollider);
+            bullet.AddRigidBody2DToTheObject(_massOfBody);
+            bullet.AddComponent<Bullet>();
+            return bullet;
+        }
+
+        private void OnBecameInvisible()
+        {
+            OnBecameInvisibleBullet?.Invoke(gameObject);
         }
 
         #endregion

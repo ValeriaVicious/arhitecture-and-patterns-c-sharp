@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6013548372903710769}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6013548371656106805}
@@ -134,7 +134,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 7
+  m_Constraints: 4
 --- !u!95 &6013548372903710773
 Animator:
   serializedVersion: 3
@@ -166,12 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eb8e9ad2990fe04e936d65060352876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bullet: {fileID: -4059299719738114309, guid: 24355889eb95e4c49a92efaf9dc4dc6a, type: 3}
   _barrel: {fileID: 6013548371656106805}
-  _force: 100
-  _speed: 3
-  _acceleration: 5
-  _health: 100
 --- !u!114 &-1380381759881980558
 MonoBehaviour:
   m_ObjectHideFlags: 0

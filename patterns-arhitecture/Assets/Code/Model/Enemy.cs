@@ -1,52 +1,33 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    internal abstract class Enemy : MonoBehaviour, IExecute
+    public sealed class Enemy : MonoBehaviour
     {
         #region Fields
 
-        [SerializeField] protected float _healthOfEnemy = 5;
-        [SerializeField] protected float _minSpeed = 2;
-        [SerializeField] protected float _maxSpeed = 6;
-        [SerializeField] protected static int _damage = 5;
-
-        protected Rigidbody2D _rigidBody;
+        private EnemyConfig _enemyData;
+        public Action<GameObject> OnEnemyOverFly;
+        public Action<GameObject> OnTriggerEnterChanging;
 
         #endregion
 
         #region Properties
 
-        public static int Damage
-        {
-            get
-            {
-                return _damage;
-            }
-        }
-
-        #endregion
-
-
-        #region UnityMethods
-
-        private void Start()
-        {
-            _rigidBody = GetComponent<Rigidbody2D>();
-        }
+        public Transform GetTransform => transform;
 
         #endregion
 
 
         #region Methods
 
-        public void Execute()
+        public void InitOfEnemy(EnemyConfig enemyData)
         {
-            MoveTheEnemy();
+            _enemyData = enemyData;
+            GetComponent<SpriteRenderer>().sprite = _enemyData.MainSprite;
         }
-
-        public abstract void MoveTheEnemy();
 
         #endregion
     }
