@@ -15,7 +15,6 @@ namespace MonkeyInTheSpace.GeekBrains
         private Queue<GameObject> _currentEnemies;
         private Enemy _enemy;
         private EnemyConfig _enemyConfig;
-        private FlewTheEnemies _flewTheEnemies;
 
         #endregion
 
@@ -26,7 +25,6 @@ namespace MonkeyInTheSpace.GeekBrains
         {
             _enemy = enemyPrefab.gameObject.GetComponent<Enemy>();
             _enemyConfig = enemyConfig;
-            _flewTheEnemies = new FlewTheEnemies(_enemy, _enemyConfig);
 
             _enemySpawnConfigs = enemySpawnerConfig;
             _enemies = new Dictionary<GameObject, Enemy>();
@@ -85,7 +83,7 @@ namespace MonkeyInTheSpace.GeekBrains
 
         public void FixedExecute(float deltaTime)
         {
-            _flewTheEnemies.TheEnemyFlewOffTheScreen();
+            
         }
 
         #endregion

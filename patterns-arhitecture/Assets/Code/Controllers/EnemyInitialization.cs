@@ -8,6 +8,7 @@ namespace MonkeyInTheSpace.GeekBrains
         #region Fields
 
         private Enemy _enemy;
+        private IMoveEnemy _moveTheEnemy;
 
         #endregion
 
@@ -15,6 +16,7 @@ namespace MonkeyInTheSpace.GeekBrains
         #region Properties
 
         public Enemy Enemy => _enemy;
+        public IMoveEnemy GetMoveEnemy => _moveTheEnemy;
 
         #endregion
 
@@ -34,6 +36,10 @@ namespace MonkeyInTheSpace.GeekBrains
         public void Initiallization()
         {
 
+        }
+        public IMoveEnemy Move()
+        {
+             return _moveTheEnemy;
         }
 
         #endregion

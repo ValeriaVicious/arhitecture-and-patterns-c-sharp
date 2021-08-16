@@ -34,14 +34,15 @@ namespace MonkeyInTheSpace.GeekBrains
         {
             var deltaTime = Time.deltaTime;
             _controllersHandler.Execute(deltaTime);
+            _controllersHandler.FixedExecute(deltaTime);
         }
 
-        private void FixedUpdate()
+/*        private void FixedUpdate()
         {
             var deltaTime = Time.deltaTime;
             _controllersHandler.FixedExecute(deltaTime);
         }
-
+*/
         #endregion
 
 

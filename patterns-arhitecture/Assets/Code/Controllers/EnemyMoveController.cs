@@ -3,12 +3,11 @@
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    internal sealed class EnemyMoveController : IExecute
+    internal sealed class EnemyMoveController : IFixedExecute
     {
         #region Fields
 
         private readonly IMoveEnemy _moveEnemy;
-        private Vector2 _direction;
 
         #endregion
 
@@ -18,7 +17,6 @@ namespace MonkeyInTheSpace.GeekBrains
         public EnemyMoveController(IMoveEnemy moveEnemy)
         {
             _moveEnemy = moveEnemy;
-            _direction = new Vector2(0.0f, -1.0f);
         }
 
         #endregion
@@ -26,9 +24,9 @@ namespace MonkeyInTheSpace.GeekBrains
 
         #region Methods
 
-        public void Execute(float deltaTime)
+        public void FixedExecute(float deltaTime)
         {
-            _moveEnemy.Move(_direction.x, _direction.y, deltaTime);
+            _moveEnemy.TheEnemyMove();
         }
 
         #endregion

@@ -28,6 +28,7 @@ namespace MonkeyInTheSpace.GeekBrains
                 playerInitialization.Shoot, playerInitialization.Player, data.PlayerConfig.ShootCoolDown));
             controllersHandler.Add(new HealthController(playerInitialization.Player, enemyInitialization.Enemy, data.PlayerConfig.PlayerHP));
             controllersHandler.Add(new EnemiesSpawner(data.EnemySpawnerConfig, enemyInitialization.Enemy, data.EnemyConfig));
+            controllersHandler.Add(new EnemyMoveController(enemyInitialization.Move()));
         }
 
         #endregion
