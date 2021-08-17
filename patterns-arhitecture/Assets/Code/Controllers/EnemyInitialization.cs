@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 
 namespace MonkeyInTheSpace.GeekBrains
@@ -8,7 +9,8 @@ namespace MonkeyInTheSpace.GeekBrains
         #region Fields
 
         private Enemy _enemy;
-        private IMoveEnemy _moveTheEnemy;
+        private CompositeMoveTheEnemy _moveTheEnemy;
+        private List<Enemy> _enemies;
 
         #endregion
 
@@ -26,6 +28,9 @@ namespace MonkeyInTheSpace.GeekBrains
         public EnemyInitialization(EnemyConfig enemyConfig)
         {
             _enemy = Object.Instantiate(enemyConfig.EnemyPrefab);
+            _moveTheEnemy = new CompositeMoveTheEnemy();
+            _enemies = new List<Enemy>();
+            AddMove(_enemy, enemyConfig.Speed);
         }
 
         #endregion
@@ -40,6 +45,20 @@ namespace MonkeyInTheSpace.GeekBrains
         public IMoveEnemy Move()
         {
              return _moveTheEnemy;
+        }
+
+        public IEnumerable<Enemy> GetEnemies()
+        {
+            foreach (var item in _enemies)
+            {
+                yield return item;
+            }
+        }
+
+        private void AddMove(Enemy enemy, float speed)
+        {
+            var moveTheEnemy = new MoveTransformOfEnemy(enemy.transform, speed);
+            _moveTheEnemy.AddUnit(moveTheEnemy);
         }
 
         #endregion
