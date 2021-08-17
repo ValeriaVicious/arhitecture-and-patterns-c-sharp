@@ -8,17 +8,9 @@ namespace MonkeyInTheSpace.GeekBrains
     {
         #region Fields
 
-        private Enemy _enemy;
+        private IEnemyFactory _enemyFactory;
         private CompositeMoveTheEnemy _moveTheEnemy;
         private List<Enemy> _enemies;
-
-        #endregion
-
-
-        #region Properties
-
-        public Enemy Enemy => _enemy;
-        public IMoveEnemy GetMoveEnemy => _moveTheEnemy;
 
         #endregion
 
@@ -27,10 +19,15 @@ namespace MonkeyInTheSpace.GeekBrains
 
         public EnemyInitialization(EnemyConfig enemyConfig)
         {
-            _enemy = Object.Instantiate(enemyConfig.EnemyPrefab);
+            _enemyFactory = new EnemyFactory(enemyConfig);
             _moveTheEnemy = new CompositeMoveTheEnemy();
             _enemies = new List<Enemy>();
-            AddMove(_enemy, enemyConfig.Speed);
+            foreach (var item in enemyConfig.Enemies)
+            {
+                var enemy = (Enemy)_enemyFactory.CreateEnemy(item.TypeOfEnemy);
+                AddMove(enemy, item.Speed);
+                _enemies.Add(enemy);
+            }
         }
 
         #endregion
@@ -44,7 +41,7 @@ namespace MonkeyInTheSpace.GeekBrains
         }
         public IMoveEnemy Move()
         {
-             return _moveTheEnemy;
+            return _moveTheEnemy;
         }
 
         public IEnumerable<Enemy> GetEnemies()
@@ -57,8 +54,14 @@ namespace MonkeyInTheSpace.GeekBrains
 
         private void AddMove(Enemy enemy, float speed)
         {
-            var moveTheEnemy = new MoveTransformOfEnemy(enemy.transform, speed);
+            IMoveEnemy moveTheEnemy = new MoveTransformOfEnemy(enemy.transform, speed);
             _moveTheEnemy.AddUnit(moveTheEnemy);
+            enemy.OnClone += enemyClone =>
+            {
+                _moveTheEnemy.RemoveUnit(moveTheEnemy);
+                AddMove(enemyClone, speed);
+                _enemies.Add(enemyClone);
+            };
         }
 
         #endregion

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    public sealed class Enemy : MonoBehaviour, IEnemy
+    public class Enemy : MonoBehaviour, IEnemy
     {
         #region Fields
 
@@ -28,7 +28,7 @@ namespace MonkeyInTheSpace.GeekBrains
 
         #region Methods
 
-        public Enemy CreateEnemy(Enemy enemyPrefab, int health, int points)
+        public static Asteroid CreateAsteroid(Asteroid enemyPrefab, int health, int points)
         {
             var enemy = Instantiate(enemyPrefab);
             enemy.Points = points;
@@ -37,7 +37,43 @@ namespace MonkeyInTheSpace.GeekBrains
             return enemy;
         }
 
-        internal Enemy Clone()
+        internal static Allien CreateAllien(Allien allienPrefab, int health, int points)
+        {
+            var enemy = Instantiate(allienPrefab);
+            enemy.Points = points;
+            enemy.Health = new HealthOfEnemy(health, health);
+            enemy._enemyPrefab = allienPrefab;
+            return enemy;
+        }
+
+        internal static UFO CreateUFO(UFO ufoPrefab, int health, int points)
+        {
+            var enemy = Instantiate(ufoPrefab);
+            enemy.Points = points;
+            enemy.Health = new HealthOfEnemy(health, health);
+            enemy._enemyPrefab = ufoPrefab;
+            return enemy;
+        }
+
+        internal static Ship CreateShip(Ship shipPrefab, int health, int points)
+        {
+            var enemy = Instantiate(shipPrefab);
+            enemy.Points = points;
+            enemy.Health = new HealthOfEnemy(health, health);
+            enemy._enemyPrefab = shipPrefab;
+            return enemy;
+        }
+
+        public static GreenShip CreateGreenShip(GreenShip greenShipPrefab, int health, int points)
+        {
+            var enemy = Instantiate(greenShipPrefab);
+            enemy.Points = points;
+            enemy.Health = new HealthOfEnemy(health, health);
+            enemy._enemyPrefab = greenShipPrefab;
+            return enemy;
+        }
+
+        public Enemy Clone()
         {
             var enemy = Instantiate(_enemyPrefab);
             enemy.Points = Points;
