@@ -42,7 +42,7 @@ namespace MonkeyInTheSpace.GeekBrains
 
         public void Initiallization()
         {
-            _enemy.OnTriggerEnterChanging += OnTriggerEnemy;
+            _enemy.OnTriggerEnterChangedEvent += OnTriggerEnemy;
         }
 
         private void OnTriggerEnemy(GameObject obj)
@@ -62,7 +62,7 @@ namespace MonkeyInTheSpace.GeekBrains
 
         public void CleanUp()
         {
-            _enemy.OnTriggerEnterChanging -= OnTriggerEnemy;
+            _enemy.OnTriggerEnterChangedEvent -= OnTriggerEnemy;
         }
 
         #endregion

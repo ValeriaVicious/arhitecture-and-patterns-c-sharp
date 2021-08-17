@@ -20,10 +20,10 @@ namespace MonkeyInTheSpace.GeekBrains
 
         #region Methods
 
-        public (Enemy enemy, int health, int points) GetEnemy(TypeOfEnemy typeOfEnemy)
+        public (Enemy enemy, int health, int points, int damage) GetEnemy(TypeOfEnemy typeOfEnemy)
         {
             var enemyInfo = _infoOfEnemies.First(info => info.TypeOfEnemy == typeOfEnemy);
-            return (enemyInfo.EnemyPrefab, enemyInfo.Health, enemyInfo.Points);
+            return (enemyInfo.EnemyPrefab, enemyInfo.Health, enemyInfo.Points, enemyInfo.Damage);
         }
 
         #endregion
@@ -38,5 +38,6 @@ namespace MonkeyInTheSpace.GeekBrains
         public float Speed;
         public int Points = 1;
         public int Health;
+        public int Damage;
     }
 }

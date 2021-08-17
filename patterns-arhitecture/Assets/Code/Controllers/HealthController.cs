@@ -53,6 +53,10 @@ namespace MonkeyInTheSpace.GeekBrains
                 Object.Destroy(_player);
                 OnDeadEvent?.Invoke();
             }
+            else
+            {
+                _hp -= enemyGameObject.Damage;
+            }
         }
 
         #endregion

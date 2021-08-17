@@ -19,27 +19,32 @@ MonoBehaviour:
     Speed: 0.01
     Points: 15
     Health: 5
+    Damage: 2
   - EnemyPrefab: {fileID: 957039080974118960, guid: 5cfcae21206029d41a8ea0fede91f4b4, type: 3}
     TypeOfEnemy: 1
     SpawnPosition: {fileID: 0}
     Speed: 0.01
     Points: 20
     Health: 8
+    Damage: 2
   - EnemyPrefab: {fileID: 4364910741833462451, guid: 102cfa74ce0fb7a48a3e630313aa4de7, type: 3}
     TypeOfEnemy: 2
     SpawnPosition: {fileID: 0}
     Speed: 0.01
     Points: 25
     Health: 6
+    Damage: 2
   - EnemyPrefab: {fileID: 482400356763070948, guid: ed72dcbba3ecc3143939440dc8d62d25, type: 3}
     TypeOfEnemy: 3
     SpawnPosition: {fileID: 0}
     Speed: 0.01
     Points: 30
     Health: 5
+    Damage: 2
   - EnemyPrefab: {fileID: 7716128498832088246, guid: 8a5c6196491c98f4d94b2cea0f7f76a9, type: 3}
     TypeOfEnemy: 4
     SpawnPosition: {fileID: 0}
     Speed: 0.01
     Points: 35
     Health: 7
+    Damage: 2
