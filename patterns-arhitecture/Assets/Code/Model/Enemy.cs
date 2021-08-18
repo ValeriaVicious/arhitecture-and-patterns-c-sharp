@@ -23,6 +23,7 @@ namespace MonkeyInTheSpace.GeekBrains
         public int Points { get; private set; }
         public int Damage { get; private set; }
 
+
         #endregion
 
 

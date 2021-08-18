@@ -24,6 +24,7 @@ namespace MonkeyInTheSpace.GeekBrains
         public UIScoreInitiallization(UIScoreConfig config)
         {
             _canvas = Object.FindObjectOfType<Canvas>();
+            Score = Object.Instantiate(config.Score, _canvas.transform);
         }
 
         #endregion
