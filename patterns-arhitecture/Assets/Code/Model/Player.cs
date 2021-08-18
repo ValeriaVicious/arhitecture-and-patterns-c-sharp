@@ -27,7 +27,6 @@ namespace MonkeyInTheSpace.GeekBrains
         private void OnTriggerEnter2D(Collider2D collision)
         {
             OnCollisionEnterChange?.Invoke(collision.gameObject);
-            print(collision.gameObject.name);
         }
 
         #endregion

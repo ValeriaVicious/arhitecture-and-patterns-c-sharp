@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerConfig: {fileID: 11400000, guid: ceb7d7379b5473d4a94f293ee41a6eb4, type: 2}
   EnemyConfig: {fileID: 11400000, guid: d7487a37361b6854db08d1355686ea92, type: 2}
+  UIScoreConfig: {fileID: 11400000, guid: 7952b4933759b704db6622ad9d8343b4, type: 2}

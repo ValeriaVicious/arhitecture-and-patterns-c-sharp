@@ -8,5 +8,6 @@ namespace MonkeyInTheSpace.GeekBrains
     {
         public PlayerConfig PlayerConfig;
         public EnemyConfig EnemyConfig;
+        public UIScoreConfig UIScoreConfig;
     }
 }

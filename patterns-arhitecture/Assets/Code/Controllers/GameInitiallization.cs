@@ -12,6 +12,7 @@ namespace MonkeyInTheSpace.GeekBrains
             var inputInitialization = new InputInitialization();
             var playerInitialization = new PlayerInitialization(data.PlayerConfig);
             var enemyInitialization = new EnemyInitialization(data.EnemyConfig);
+            var scoreUIInitialization = new UIScoreInitiallization(data.UIScoreConfig);
 
             controllersHandler.Add(enemyInitialization);
             controllersHandler.Add(playerInitialization);
@@ -26,6 +27,7 @@ namespace MonkeyInTheSpace.GeekBrains
             controllersHandler.Add(new ShootController(inputInitialization.GetFire(),
                 playerInitialization.Shoot, playerInitialization.Player, data.PlayerConfig.ShootCoolDown));
             controllersHandler.Add(new HealthController(playerInitialization.Player, data.PlayerConfig.PlayerHP));
+            controllersHandler.Add(new ScoreController(scoreUIInitialization.Score));
         }
 
         #endregion
