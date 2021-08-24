@@ -18,7 +18,7 @@ namespace MonkeyInTheSpace.GeekBrains
         public ScoreController(GameObject scoreTextObject)
         {
             _displayScore = new TextScoreOnDisplay(scoreTextObject);
-            MessageBroker.Subcribe<EnemyDestroyMessage>(OnEnemyDestroy);
+            MessageBroker.Subscribe<EnemyDestroyMessage>(OnEnemyDestroy);
         }
 
         #endregion
