@@ -7,5 +7,6 @@ namespace MonkeyInTheSpace.GeekBrains
     public sealed class UIScoreConfig : ScriptableObject
     {
         public GameObject Score;
+        public GameObject DestroyedEnemies;
     }
 }
