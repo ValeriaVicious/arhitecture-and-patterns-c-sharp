@@ -8,11 +8,13 @@ namespace MonkeyInTheSpace.GeekBrains
 
         public GameInitiallization(ControllersHandler controllersHandler, GameConfig data)
         {
+            ServiceLocator.SetService<IViewService>(new ViewViewServices());
             var inputInitialization = new InputInitialization();
             var playerInitialization = new PlayerInitialization(data.PlayerConfig);
-            var enemiesSpawnerInitialization = new EnemiesSpawnerInitialization(data.EnemySpawnerConfig);
+            var enemyInitialization = new EnemyInitialization(data.EnemyConfig);
+            var scoreUIInitialization = new UIScoreInitiallization(data.UIScoreConfig);
 
-            controllersHandler.Add(enemiesSpawnerInitialization);
+            controllersHandler.Add(enemyInitialization);
             controllersHandler.Add(playerInitialization);
             controllersHandler.Add(inputInitialization);
 
@@ -20,9 +22,12 @@ namespace MonkeyInTheSpace.GeekBrains
                 inputInitialization.GetAcceleration()));
             controllersHandler.Add(new MoveController(inputInitialization.GetInput(),
                 playerInitialization.Move));
+            controllersHandler.Add(new EnemyMoveController(enemyInitialization.Move()));
+            controllersHandler.Add(new EnemiesSpawnerInitialization(enemyInitialization.GetEnemies()));
             controllersHandler.Add(new ShootController(inputInitialization.GetFire(),
-                playerInitialization.Shoot));
-            controllersHandler.Add(new HealthController(playerInitialization.Player));
+                playerInitialization.Shoot, playerInitialization.Player, data.PlayerConfig.ShootCoolDown));
+            controllersHandler.Add(new HealthController(playerInitialization.Player, data.PlayerConfig.PlayerHP));
+            controllersHandler.Add(new ScoreController(scoreUIInitialization.Score));
         }
 
         #endregion

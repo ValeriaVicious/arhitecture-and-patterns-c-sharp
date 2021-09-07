@@ -19,4 +19,4 @@ MonoBehaviour:
   AccelerationSpeed: 10
   PlayerHP: 100
   BulletForce: 500
-  ShootCoolDown: 0
+  ShootCoolDown: 3

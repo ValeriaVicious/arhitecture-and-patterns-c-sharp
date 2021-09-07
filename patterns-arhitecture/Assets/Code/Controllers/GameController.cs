@@ -34,6 +34,7 @@ namespace MonkeyInTheSpace.GeekBrains
         {
             var deltaTime = Time.deltaTime;
             _controllersHandler.Execute(deltaTime);
+            _controllersHandler.FixedExecute(deltaTime);
         }
 
         private void FixedUpdate()

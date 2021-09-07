@@ -1,29 +1,32 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    internal sealed class EnemiesSpawnerInitialization : IInitialization
+    internal sealed class EnemiesSpawnerInitialization : IInitialization, ICleanup
     {
         #region Fields
 
-        private GameObject _enemiesSpawner;
-
-        #endregion
-
-
-        #region Properties
-
-        public GameObject EnemiesSpawner => _enemiesSpawner;
+        private CompositeEnemySpawner _compositeEnemySpawner;
+        private List<EnemiesSpawner> _enemiesSpawner;
 
         #endregion
 
 
         #region ClassLifeCycles
 
-        public EnemiesSpawnerInitialization(EnemySpawnerConfig enemySpawnerConfig)
+        public EnemiesSpawnerInitialization(IEnumerable<Enemy> enemies)
         {
-            _enemiesSpawner = Object.Instantiate(enemySpawnerConfig.Spawner);
+            _compositeEnemySpawner = new CompositeEnemySpawner();
+            _enemiesSpawner = new List<EnemiesSpawner>();
+            foreach (var item in enemies)
+            {
+                var enemySpawner = new EnemiesSpawner(item);
+                _compositeEnemySpawner.AddSpawner(enemySpawner);
+                _enemiesSpawner.Add(enemySpawner);
+            }
+
         }
 
         #endregion
@@ -31,9 +34,33 @@ namespace MonkeyInTheSpace.GeekBrains
 
         #region Methods
 
+        public IEnumerable<EnemiesSpawner> GetEnemiesSpawners()
+        {
+            foreach (var item in _enemiesSpawner)
+            {
+                yield return item;
+            }
+        }
+
+        public ISpawner GetSpawner()
+        {
+            return _compositeEnemySpawner;
+        }
+
         public void Initiallization()
         {
+            foreach (var item in _enemiesSpawner)
+            {
+                item.Initiallization();
+            }
+        }
 
+        public void CleanUp()
+        {
+            foreach (var item in _enemiesSpawner)
+            {
+                item.CleanUp();
+            }
         }
 
         #endregion

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d9013a0dec89b43831cfd7913aa56d, type: 3}
   m_Name: UFO
   m_EditorClassIdentifier: 
+  _enemyPrefab: {fileID: 6861882835090818782, guid: 9a922500e54dacd4c9dee10786673634, type: 3}
   _mainSprite: {fileID: 21300000, guid: f19b615628ffda74d89c56579583c301, type: 3}
   _speedOfEnemy: 0.04
   _damageOfEnemy: 2

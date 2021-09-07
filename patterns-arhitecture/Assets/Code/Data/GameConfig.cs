@@ -7,6 +7,7 @@ namespace MonkeyInTheSpace.GeekBrains
     public sealed class GameConfig : ScriptableObject
     {
         public PlayerConfig PlayerConfig;
-        public EnemySpawnerConfig EnemySpawnerConfig;
+        public EnemyConfig EnemyConfig;
+        public UIScoreConfig UIScoreConfig;
     }
 }

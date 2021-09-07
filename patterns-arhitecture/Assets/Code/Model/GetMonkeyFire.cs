@@ -21,9 +21,9 @@ namespace MonkeyInTheSpace.GeekBrains
             Sprite spriteOfBullet)
         {
             _bullet = Bullet.CreateBullet(spriteOfBullet);
+            _pool = ServiceLocator.Resolve<IViewService>();
             _barrelSpawner = barrel;
             _force = force;
-            _pool = new ViewViewServices();
             _bullet.SetActive(false);
         }
 

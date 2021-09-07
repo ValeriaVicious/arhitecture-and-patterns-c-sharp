@@ -1,30 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    public sealed class EnemiesSpawner
+    public sealed class EnemiesSpawner : ISpawner, IInitialization, ICleanup
     {
 
         #region Fields
 
-        private EnemySpawnerConfig _enemySpawnConfigs;
-        private Dictionary<GameObject, Enemy> _enemies;
-        private Queue<GameObject> _currentEnemies;
+        private Vector3 _position;
+        private Enemy _enemy;
+
+        public event Action<IEnemy> OnSpawnEnemy;
 
         #endregion
 
 
         #region ClassLifeCycles
 
-        public EnemiesSpawner()
+        public EnemiesSpawner(Enemy enemyPrefab)
         {
-            _enemies = new Dictionary<GameObject, Enemy>();
-            _currentEnemies = new Queue<GameObject>();
-            CreateAndGetAndLoadToThePoolObjects();
-            Spawn().StartCoroutine(out _);
+            _position = enemyPrefab.transform.position;
+            _enemy = enemyPrefab;
         }
 
         #endregion
@@ -32,51 +30,39 @@ namespace MonkeyInTheSpace.GeekBrains
 
         #region Methods
 
-        private IEnumerator Spawn()
+        private Enemy Spawn()
         {
-            if (_enemySpawnConfigs.SpawnTime == 0)
-            {
-                _enemySpawnConfigs.SpawnTime = 1;
-            }
+            var enemyClone = _enemy.Clone();
+            enemyClone.Health.ChangeCurrentHealth(enemyClone.Health.MaxHealth);
+            enemyClone.transform.position = _position;
+            enemyClone.OnTriggerEnterChangedEvent += OnTriggerEnemy;
+            OnSpawnEnemy?.Invoke(enemyClone);
+            return enemyClone;
+        }
 
-            while (true)
+        public void Initiallization()
+        {
+            _enemy.OnTriggerEnterChangedEvent += OnTriggerEnemy;
+        }
+
+        private void OnTriggerEnemy(GameObject obj)
+        {
+            if (obj.GetComponent<Bullet>() || obj.GetComponent<Player>())
             {
-                if (_currentEnemies.Count > 0)
+                _enemy.Health.ChangeCurrentHealth(_enemy.Health.CurrentHealth - 1);
+                if (_enemy.Health.CurrentHealth <= 0)
                 {
-                    yield return new WaitForSeconds(_enemySpawnConfigs.SpawnTime);
-                    var enemy = _currentEnemies.Dequeue();
-                    var getEnemy = _enemies[enemy];
-                    enemy.SetActive(true);
-
-                    int randomEnemyObject = Random.Range(0, _enemySpawnConfigs.EnemyConfigs.Count);
-
-                    getEnemy.InitOfEnemy(_enemySpawnConfigs.EnemyConfigs[randomEnemyObject]);
-
-                    float positionX = Random.Range(-CameraOfTheGame.Border, CameraOfTheGame.Border);
-                    enemy.transform.position = new Vector3(positionX, _enemySpawnConfigs.Spawner.transform.position.y);
-
+                    _enemy.OnTriggerEnterChangedEvent -= OnTriggerEnemy;
+                    var spawnNewEnemy = Spawn();
+                    UnityEngine.Object.Destroy(_enemy.gameObject);
+                    _enemy = spawnNewEnemy;
                 }
             }
-
         }
 
-        private void ReturnEnemy(GameObject enemy)
+        public void CleanUp()
         {
-            enemy.transform.position = _enemySpawnConfigs.Spawner.transform.position;
-            enemy.SetActive(false);
-            _currentEnemies.Enqueue(enemy);
-        }
-
-        private void CreateAndGetAndLoadToThePoolObjects()
-        {
-            for (int i = 0; i < _enemySpawnConfigs.PoolCount; ++i)
-            {
-                var prefabOfEnemy = Object.Instantiate(_enemySpawnConfigs.EnemyPrefab);
-                prefabOfEnemy.gameObject.SetActive(false);
-                _enemies.Add(prefabOfEnemy.gameObject, prefabOfEnemy);
-                _currentEnemies.Enqueue(prefabOfEnemy.gameObject);
-                prefabOfEnemy.OnEnemyOverFly += ReturnEnemy;
-            }
+            _enemy.OnTriggerEnterChangedEvent -= OnTriggerEnemy;
         }
 
         #endregion
