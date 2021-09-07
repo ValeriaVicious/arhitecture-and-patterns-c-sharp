@@ -55,6 +55,7 @@ namespace MonkeyInTheSpace.GeekBrains
                     _enemy.OnTriggerEnterChangedEvent -= OnTriggerEnemy;
                     var spawnNewEnemy = Spawn();
                     UnityEngine.Object.Destroy(_enemy.gameObject);
+                    _enemy.OnDestroy?.Invoke(_enemy.ToString());
                     _enemy = spawnNewEnemy;
                 }
             }

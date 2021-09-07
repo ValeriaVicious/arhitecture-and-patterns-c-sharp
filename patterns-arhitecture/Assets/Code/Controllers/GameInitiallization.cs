@@ -11,8 +11,9 @@ namespace MonkeyInTheSpace.GeekBrains
             ServiceLocator.SetService<IViewService>(new ViewViewServices());
             var inputInitialization = new InputInitialization();
             var playerInitialization = new PlayerInitialization(data.PlayerConfig);
-            var enemyInitialization = new EnemyInitialization(data.EnemyConfig);
-            var scoreUIInitialization = new UIScoreInitiallization(data.UIScoreConfig);
+            var uiInitialization = new UIInitiallization(data.UIScoreConfig);
+            var enemyInitialization = new EnemyInitialization(data.EnemyConfig, new DisplayedDestroyedObjects(uiInitialization.DestroyedEnemy));
+            var scoreUIInitialization = new UIInitiallization(data.UIScoreConfig);
 
             controllersHandler.Add(enemyInitialization);
             controllersHandler.Add(playerInitialization);

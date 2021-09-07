@@ -3,7 +3,7 @@
 
 namespace MonkeyInTheSpace.GeekBrains
 {
-    public sealed class UIScoreInitiallization
+    public sealed class UIInitiallization
     {
         #region Fields
 
@@ -15,16 +15,18 @@ namespace MonkeyInTheSpace.GeekBrains
         #region Properties
 
         public GameObject Score { get; private set; }
+        public GameObject DestroyedEnemy;
 
         #endregion
 
 
         #region ClassLifeCycles
 
-        public UIScoreInitiallization(UIScoreConfig config)
+        public UIInitiallization(UIScoreConfig config)
         {
             _canvas = Object.FindObjectOfType<Canvas>();
             Score = Object.Instantiate(config.Score, _canvas.transform);
+            DestroyedEnemy = Object.Instantiate(config.DestroyedEnemies, _canvas.transform);
         }
 
         #endregion

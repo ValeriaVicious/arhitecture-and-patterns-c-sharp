@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: ScoreUIConfig
   m_EditorClassIdentifier: 
   Score: {fileID: 94570701623862938, guid: d7a5220cb5052d44da47c86dd08100d6, type: 3}
+  DestroyedEnemies: {fileID: 6619866445680267855, guid: 711c99f734528174a8f5c8213454f9fa, type: 3}
